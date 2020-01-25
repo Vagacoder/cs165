@@ -1,4 +1,4 @@
-package changemyname;
+package bankAccountManager;
 
 import static sbcc.Core.*;
 
