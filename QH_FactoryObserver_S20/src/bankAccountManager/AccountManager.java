@@ -2,14 +2,27 @@ package bankAccountManager;
 
 import java.util.ArrayList;
 
-public abstract class AccountManager {
+public class AccountManager extends IAccountManager{
 
-    private ArrayList<AccountListener> accountListeners = new ArrayList<>();
+    private ArrayList<IAccountListener> accountListeners = new ArrayList<>();
 
-    public abstract void addAccountListener(AccountListener listener);
+    @Override
+    public void addAccountListener(IAccountListener listener) {
+        this.accountListeners.add(listener);
+    }
 
-    public abstract void removeAccountListener(AccountListener listener);
+    @Override
+    public void removeAccountListener(IAccountListener listener) {
+        this.accountListeners.remove(listener);
+    }
 
-    public abstract void fireAccountUpdated();
+    @Override
+    public void fireAccountUpdated() {
+        for (IAccountListener listener : this.accountListeners){
+            listener.updateAccount(this);
+        }
 
+    }
+
+    
 }

@@ -1,23 +1,23 @@
 package bankAccount;
 
-public class CDAccount extends IAccount {
+public class MoneyMarketAccount extends IAccount {
 
     // constructors
-    public CDAccount() {
-        this.acctType = "CD";
+    public MoneyMarketAccount() {
+        this.acctType = "MoneyMarket";
     }
 
-    public CDAccount(int startBalanceInCent) {
+    public MoneyMarketAccount(int startBalanceInCent) {
         this();
         this.balanceInCent = startBalanceInCent;
     }
 
-    public CDAccount(String accountName) {
+    public MoneyMarketAccount(String accountName) {
         this();
         this.acctName = accountName;
     }
 
-    public CDAccount(String accountName, int startBalanceInCent) {
+    public MoneyMarketAccount(String accountName, int startBalanceInCent) {
         this(accountName);
         this.balanceInCent = startBalanceInCent;
     }

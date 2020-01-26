@@ -1,8 +1,8 @@
 package bankAccountManager;
 
-import bankAccount.Account;
+import bankAccount.IAccount;
 
 public abstract class CreateAccount {
 
-    public abstract Account createAccount(String accountType) throws Exception;
+    public abstract IAccount createAccount(String accountType) throws Exception;
 }

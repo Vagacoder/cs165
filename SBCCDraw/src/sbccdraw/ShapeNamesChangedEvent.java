@@ -9,6 +9,6 @@ public class ShapeNamesChangedEvent extends java.util.EventObject {
 
 
 	public DrawShapeFactory getSource() {
-		return (DrawShapeFactory) source;
+		return (DrawShapeFactory) this.source;
 	}
 }

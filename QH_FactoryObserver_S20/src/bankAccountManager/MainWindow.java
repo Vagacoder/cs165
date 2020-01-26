@@ -21,9 +21,11 @@ import org.jfree.chart.plot.*;
 import org.jfree.chart.renderer.category.*;
 import org.jfree.data.category.*;
 
+import bankAccount.*;
+
 import javax.swing.event.ListSelectionEvent;
 
-public class MainWindow extends JFrame implements AccountListener {
+public class MainWindow extends JFrame implements IAccountListener {
 
 	/**
 	 *
@@ -47,6 +49,9 @@ public class MainWindow extends JFrame implements AccountListener {
 	DefaultCategoryDataset chartModel;
 
 	private AccountFactory accountFactory;
+	private AccountManager accountManager;
+
+	private ArrayList<IAccount> accountList = new ArrayList<>();
 
 	/**
 	 * Creates the MainWindow and shows it on the screen.
@@ -75,17 +80,23 @@ public class MainWindow extends JFrame implements AccountListener {
 		String selectedAccountType = String.valueOf(this.accountTypesView.getSelectedItem());
 		println(selectedAccountType);
 		try {
-			this.accountFactory.createAccount(selectedAccountType);
+			IAccount newAccount = this.accountFactory.createAccount(selectedAccountType);
+			println(newAccount.getAcctType());
+			this.accountList.add(newAccount);
+			int index = this.accountsModel.getSize();
+			this.accountsModel.add(index, (index + 1) + " - " + newAccount.getAcctType());
 		} catch (Exception ex) {
 			ex.printStackTrace();
 		}
 	}
 
 	/**
-	 * Called when the REMOVE button is clicked.
+	 * 
+	 * 
 	 * 
 	 * @param e
 	 */
+
 	protected void do_removeButton_actionPerformed(ActionEvent e) {
 	}
 
@@ -176,6 +187,8 @@ public class MainWindow extends JFrame implements AccountListener {
 	 */
 	public MainWindow() {
 
+		this.accountFactory = new AccountFactory();
+
 		// * main window (JFrame) settings
 		// set icon at right upper corner
 		this.setIconImage(Toolkit.getDefaultToolkit().getImage("bank-256x256.png"));
@@ -219,7 +232,7 @@ public class MainWindow extends JFrame implements AccountListener {
 		accountTypes.add("CD");
 		accountTypes.add("Checking");
 		accountTypes.add("Saving");
-		accountTypes.add("Money Market");
+		accountTypes.add("MoneyMarket");
 
 		// setting drop down menu
 		this.accountTypesModel.addAll(accountTypes);
@@ -351,7 +364,7 @@ public class MainWindow extends JFrame implements AccountListener {
 	}
 
 	@Override
-	public void updateAccount(AccountManager source) {
+	public void updateAccount(IAccountManager source) {
 		// TODO Auto-generated method stub
 
 	}

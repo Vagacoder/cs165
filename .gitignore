@@ -1,4 +1,6 @@
 .metadata/
 **/*.class
 .vscode
+/.recommenders/
+**/bin
 
