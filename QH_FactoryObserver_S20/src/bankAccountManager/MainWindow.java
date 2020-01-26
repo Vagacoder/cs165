@@ -123,6 +123,7 @@ public class MainWindow extends JFrame implements IAccountListener {
       int selectedIndex = this.accountsView.getSelectedIndex();
       this.accountManager.setSelectedAccount(selectedIndex);
       this.accountManager.deposite(amountInCent);
+      this.accountManager.fireAccountUpdated();
     } catch (Exception ex) {
       println("System warning: Wrong input!");
     }
@@ -144,6 +145,7 @@ public class MainWindow extends JFrame implements IAccountListener {
       int selectedIndex = this.accountsView.getSelectedIndex();
       this.accountManager.setSelectedAccount(selectedIndex);
       this.accountManager.withdraw(amountInCent);
+      this.accountManager.fireAccountUpdated();
     } catch (Exception ex) {
       println("System warning: Wrong input!");
     }
@@ -401,10 +403,21 @@ public class MainWindow extends JFrame implements IAccountListener {
   @Override
   public void updateAccount(IAccountManager source) {
     ArrayList<IAccount> accountsList = source.getAllAccouts();
+    int N = accountsList.size();
+    String[] xLabelsForChart = new String[N];
+    double[] yValuesForChart = new double[N];
+
     this.accountsModel.clear();
-    for (int i = 0; i < accountsList.size(); i++) {
-      this.accountsModel.add(i, (i + 1) + " - " + accountsList.get(i).getAcctType());
+    for (int i = 0; i < N; i++) {
+      IAccount acct = accountsList.get(i);
+      this.accountsModel.add(i, (i + 1) + " - " + acct.getAcctType());
+      xLabelsForChart[i] = acct.getAcctType();
+      int amountInCent = acct.getBalanceInCent();
+      double amount = amountInCent * 1.0 / 100;
+      yValuesForChart[i] = amount;
     }
+
+    this.updateChartView(xLabelsForChart, yValuesForChart);
 
   }
 
