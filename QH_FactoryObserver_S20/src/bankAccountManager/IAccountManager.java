@@ -10,6 +10,10 @@ public abstract class IAccountManager {
     public abstract void removeAccountListener(IAccountListener listener);
 
     public abstract void fireAccountUpdated();
+    
+    public abstract void fireMessageUpdated();
+
+    public abstract String getFeedbackMessage();
 
     public abstract void addAccount(IAccount account);
 

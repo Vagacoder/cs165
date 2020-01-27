@@ -173,6 +173,7 @@ public class MainWindow extends JFrame implements IAccountListener {
    * 
    * @param accountTypes
    */
+  @Deprecated
   void updateAccountListView(String[] accounts) {
     accountsModel.removeAllElements();
     for (String account : accounts)
@@ -411,7 +412,7 @@ public class MainWindow extends JFrame implements IAccountListener {
     for (int i = 0; i < N; i++) {
       IAccount acct = accountsList.get(i);
       this.accountsModel.add(i, (i + 1) + " - " + acct.getAcctType());
-      xLabelsForChart[i] = acct.getAcctType();
+      xLabelsForChart[i] = (i + 1) + " - " + acct.getAcctType();
       int amountInCent = acct.getBalanceInCent();
       double amount = amountInCent * 1.0 / 100;
       yValuesForChart[i] = amount;
@@ -419,6 +420,12 @@ public class MainWindow extends JFrame implements IAccountListener {
 
     this.updateChartView(xLabelsForChart, yValuesForChart);
 
+  }
+
+  @Override
+  public void updateMessage(IAccountManager source) {
+    String message = source.getFeedbackMessage();
+    println(message);
   }
 
 }
