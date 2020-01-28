@@ -173,7 +173,6 @@ public class MainWindow extends JFrame implements IAccountListener {
    * 
    * @param accountTypes
    */
-  @Deprecated
   void updateAccountListView(String[] accounts) {
     accountsModel.removeAllElements();
     for (String account : accounts)
@@ -198,8 +197,8 @@ public class MainWindow extends JFrame implements IAccountListener {
    */
   void initChart() {
     this.chartModel = new DefaultCategoryDataset();
-    this.chart = ChartFactory.createBarChart3D("", "", "DOLLARS", chartModel, PlotOrientation.VERTICAL, false, true,
-        true);
+    this.chart = ChartFactory.createBarChart3D("", "", "DOLLARS", chartModel, 
+      PlotOrientation.VERTICAL, false, true, false);
     this.chart.setAntiAlias(true);
     CategoryPlot plot = chart.getCategoryPlot();
     BarRenderer renderer = (BarRenderer) plot.getRenderer();
@@ -405,21 +404,21 @@ public class MainWindow extends JFrame implements IAccountListener {
   public void updateAccount(IAccountManager source) {
     ArrayList<IAccount> accountsList = source.getAllAccouts();
     int N = accountsList.size();
+    String[] accountNames = new String[N];
     String[] xLabelsForChart = new String[N];
     double[] yValuesForChart = new double[N];
 
     this.accountsModel.clear();
     for (int i = 0; i < N; i++) {
       IAccount acct = accountsList.get(i);
-      this.accountsModel.add(i, (i + 1) + " - " + acct.getAcctType());
+      accountNames[i] = ((i + 1) + " - " + acct.getAcctType());
       xLabelsForChart[i] = (i + 1) + " - " + acct.getAcctType();
       int amountInCent = acct.getBalanceInCent();
       double amount = amountInCent * 1.0 / 100;
       yValuesForChart[i] = amount;
     }
-
+    this.updateAccountListView(accountNames);
     this.updateChartView(xLabelsForChart, yValuesForChart);
-
   }
 
   @Override
