@@ -102,9 +102,7 @@ public class MainWindow extends JFrame implements IAccountListener {
 
   protected void do_removeButton_actionPerformed(ActionEvent e) {
     int selectedIndex = this.accountsView.getSelectedIndex();
-    this.accountManager.setSelectedAccount(selectedIndex);
-    this.accountManager.removeSelectedAccount();
-    this.accountManager.fireAccountUpdated();
+    this.accountManager.removeSelectedAccount(selectedIndex);
   }
 
   /**
@@ -121,9 +119,7 @@ public class MainWindow extends JFrame implements IAccountListener {
       println(amountInCent);
 
       int selectedIndex = this.accountsView.getSelectedIndex();
-      this.accountManager.setSelectedAccount(selectedIndex);
-      this.accountManager.deposite(amountInCent);
-      this.accountManager.fireAccountUpdated();
+      this.accountManager.deposite(selectedIndex, amountInCent);
     } catch (Exception ex) {
       println("System warning: Wrong input!");
     }
@@ -143,9 +139,7 @@ public class MainWindow extends JFrame implements IAccountListener {
       println(amountInCent);
 
       int selectedIndex = this.accountsView.getSelectedIndex();
-      this.accountManager.setSelectedAccount(selectedIndex);
-      this.accountManager.withdraw(amountInCent);
-      this.accountManager.fireAccountUpdated();
+      this.accountManager.withdraw(selectedIndex, amountInCent);
     } catch (Exception ex) {
       println("System warning: Wrong input!");
     }

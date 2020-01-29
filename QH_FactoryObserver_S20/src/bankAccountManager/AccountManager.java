@@ -51,7 +51,8 @@ public class AccountManager extends IAccountManager {
   }
 
   @Override
-  public void removeSelectedAccount() {
+  public void removeSelectedAccount(int indexOfAccount) {
+    this.setSelectedAccount(indexOfAccount);
     if (this.selectedAccountIndex >= 0 && this.selectedAccountIndex < this.accountList.size()) {
       IAccount removedAcct = this.accountList.remove(this.selectedAccountIndex);
       this.selectedAccountIndex = -1;
@@ -62,6 +63,7 @@ public class AccountManager extends IAccountManager {
       println("System warning: Please select an account!");
       this.feedbackMessage = "Warning: Please select an account!";
     }
+    this.fireAccountUpdated();
   }
 
   @Override
@@ -85,13 +87,13 @@ public class AccountManager extends IAccountManager {
     return this.accountList;
   }
 
-  @Override
-  public void setSelectedAccount(int index) {
+  private void setSelectedAccount(int index) {
     this.selectedAccountIndex = index;
   }
 
   @Override
-  public void deposite(int amountInCent) {
+  public void deposite(int indexOfAccount, int amountInCent) {
+    this.setSelectedAccount(indexOfAccount);
     if (this.selectedAccountIndex >= 0) {
       IAccount selectedAcct = this.accountList.get(this.selectedAccountIndex);
       selectedAcct.deposite(amountInCent);
@@ -103,10 +105,12 @@ public class AccountManager extends IAccountManager {
       println("System warning: Please select an account!");
       this.feedbackMessage = "Warning: Please select an account!";
     }
+    this.fireAccountUpdated();
   }
 
   @Override
-  public void withdraw(int amountInCent) {
+  public void withdraw(int indexOfAccount, int amountInCent) {
+    this.setSelectedAccount(indexOfAccount);
     if (this.selectedAccountIndex >= 0) {
       IAccount selectedAcct = this.accountList.get(this.selectedAccountIndex);
       if (selectedAcct.getBalanceInCent() >= amountInCent) {
@@ -123,6 +127,7 @@ public class AccountManager extends IAccountManager {
       println("System warning: Please select an account!");
       this.feedbackMessage = "Warning: Please select an account!";
     }
+    this.fireAccountUpdated();
   }
 
 }

@@ -17,7 +17,7 @@ public abstract class IAccountManager {
 
     public abstract void addAccount(IAccount account);
 
-    public abstract void removeSelectedAccount();
+    public abstract void removeSelectedAccount(int indexOfAccount);
 
     public abstract IAccount getAccount(int index);
 
@@ -25,10 +25,8 @@ public abstract class IAccountManager {
 
     public abstract ArrayList<IAccount> getAllAccountsByType(String acctType);
 
-    public abstract void setSelectedAccount(int index);
+    public abstract void deposite(int indexOfAccount, int amountInCent);
 
-    public abstract void deposite(int amountInCent);
-
-    public abstract void withdraw(int amountInCent);
+    public abstract void withdraw(int indexOfAccount, int amountInCent);
 
 }
