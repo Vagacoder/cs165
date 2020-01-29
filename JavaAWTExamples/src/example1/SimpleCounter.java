@@ -39,7 +39,9 @@ public class SimpleCounter extends Frame implements ActionListener, KeyListener 
 
       @Override
       public void actionPerformed(ActionEvent arg0) {
-        dispose();
+        System.out.println(arg0);
+        SimpleCounter.this.dispose(); 
+        // dispose();
       }
     });
     this.counterInput.addKeyListener(this);

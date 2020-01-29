@@ -6,7 +6,6 @@ import java.awt.event.*;
 
 public class Accumulator extends Frame implements ActionListener{
 
-
     /**
      *
      */
@@ -37,11 +36,21 @@ public class Accumulator extends Frame implements ActionListener{
 
         this.setTitle("Accumulator using AWT");
         this.setSize(350,120);
-        this.addWindowListener(new WindowAdapter(){
-            public void windowClosing(WindowEvent e){
-                dispose();
-            }
-        });
+
+        
+        // This is how to close AWT window/frame
+        // Solution 1 : using WindowAdapter =========================
+        // this.addWindowListener(new WindowAdapter(){
+        //     public void windowClosing(WindowEvent e){
+        //         dispose();
+        //     }
+        // });
+        // ==========================================================
+
+        // Solution 2: Outer window listener ========================
+            this.addWindowListener(new closeListener(this));
+        // ===========================================================
+
         this.setVisible(true);
     }
 
@@ -61,4 +70,57 @@ public class Accumulator extends Frame implements ActionListener{
 
     }
 
+}
+
+class closeListener implements WindowListener{
+
+    private Frame frame;
+
+    public closeListener(Frame frame){
+        this.frame = frame;
+    }
+
+    @Override
+    public void windowActivated(WindowEvent arg0) {
+        // TODO Auto-generated method stub
+
+    }
+
+    @Override
+    public void windowClosed(WindowEvent arg0) {
+        // TODO Auto-generated method stub
+
+    }
+
+    @Override
+    public void windowClosing(WindowEvent arg0) {
+        // TODO Auto-generated method stub
+        System.out.println("Closing!");
+        frame.dispose();
+    }
+
+    @Override
+    public void windowDeactivated(WindowEvent arg0) {
+        // TODO Auto-generated method stub
+
+    }
+
+    @Override
+    public void windowDeiconified(WindowEvent arg0) {
+        // TODO Auto-generated method stub
+
+    }
+
+    @Override
+    public void windowIconified(WindowEvent arg0) {
+        // TODO Auto-generated method stub
+
+    }
+
+    @Override
+    public void windowOpened(WindowEvent arg0) {
+        // TODO Auto-generated method stub
+
+    }
+    
 }
