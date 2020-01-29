@@ -19,8 +19,12 @@ import java.awt.CheckboxGroup;
 
 public class GUIsamples extends Frame{
 	
+	/**
+	 *
+	 */
+	private static final long serialVersionUID = -3182521474915448353L;
+	
 	// private Panel mainPanel;
-
 	private Label label1;
 	private Label label2;
 	private TextField textInput1;
