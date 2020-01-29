@@ -13,6 +13,7 @@ public class SimpleCounter extends Frame implements ActionListener, KeyListener 
   private Label counterLabel;
   private TextField counterInput;
   private Button counterBtn;
+  private Button closeBtn;
   private int count;
 
   public SimpleCounter() {
@@ -27,16 +28,70 @@ public class SimpleCounter extends Frame implements ActionListener, KeyListener 
     this.add(this.counterInput);
 
     this.counterBtn = new Button("Count!");
+    this.closeBtn = new Button("Close!");
     this.add(this.counterBtn);
+    this.add(this.closeBtn);
 
+    
     this.counterBtn.addActionListener(this);
     this.counterBtn.addKeyListener(this);
+    this.closeBtn.addActionListener(new ActionListener(){
+
+      @Override
+      public void actionPerformed(ActionEvent arg0) {
+        dispose();
+      }
+    });
     this.counterInput.addKeyListener(this);
     this.counterLabel.addKeyListener(this);
     this.setTitle("Simple Counter using AWT");
     this.setSize(250, 100);
 
     this.setVisible(true);
+    this.addWindowListener(new WindowListener(){
+
+      @Override
+      public void windowActivated(WindowEvent arg0) {
+        // TODO Auto-generated method stub
+
+      }
+
+      @Override
+      public void windowClosed(WindowEvent arg0) {
+        // TODO Auto-generated method stub
+
+      }
+
+      @Override
+      public void windowClosing(WindowEvent arg0) {
+        dispose();
+      }
+
+      @Override
+      public void windowDeactivated(WindowEvent arg0) {
+        // TODO Auto-generated method stub
+
+      }
+
+      @Override
+      public void windowDeiconified(WindowEvent arg0) {
+        // TODO Auto-generated method stub
+
+      }
+
+      @Override
+      public void windowIconified(WindowEvent arg0) {
+        // TODO Auto-generated method stub
+
+      }
+
+      @Override
+      public void windowOpened(WindowEvent arg0) {
+        // TODO Auto-generated method stub
+
+      }
+      
+    });
   }
 
   @Override

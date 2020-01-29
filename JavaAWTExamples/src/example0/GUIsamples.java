@@ -11,19 +11,20 @@ import java.awt.Panel;
 import java.awt.Label;
 import java.awt.Button;
 import java.awt.TextField;
+import java.awt.event.WindowEvent;
+import java.awt.event.WindowListener;
 import java.awt.Choice;
 import java.awt.Color;
 import java.awt.Checkbox;
 import java.awt.CheckboxGroup;
 
+public class GUIsamples extends Frame {
 
-public class GUIsamples extends Frame{
-	
 	/**
 	 *
 	 */
 	private static final long serialVersionUID = -3182521474915448353L;
-	
+
 	// private Panel mainPanel;
 	private Label label1;
 	private Label label2;
@@ -35,13 +36,13 @@ public class GUIsamples extends Frame{
 	private Button button1;
 	private Button button2;
 
-	public GUIsamples () {
+	public GUIsamples() {
 
 		Panel mainPanel = new Panel();
 		// this.mainPanel.setSize(200,100);
 		mainPanel.setBackground(new Color(0xffff00));
 		this.add(mainPanel);
-		
+
 		this.label1 = new Label("This is label #1");
 		// this.label1.setSize(200, 100);
 		mainPanel.add(this.label1);
@@ -59,12 +60,55 @@ public class GUIsamples extends Frame{
 		this.textInput1 = new TextField("Please enter words", 20);
 		mainPanel.add(this.textInput1);
 
+		// This is how to close AWT window
+		this.addWindowListener(new WindowListener() {
+
+			@Override
+			public void windowActivated(WindowEvent arg0) {
+				// TODO Auto-generated method stub
+
+			}
+
+			@Override
+			public void windowClosed(WindowEvent arg0) {
+				System.out.println("Window is closed!");
+			}
+
+			@Override
+			public void windowClosing(WindowEvent arg0) {
+				dispose();
+			}
+
+			@Override
+			public void windowDeactivated(WindowEvent arg0) {
+				// TODO Auto-generated method stub
+
+			}
+
+			@Override
+			public void windowDeiconified(WindowEvent arg0) {
+				// TODO Auto-generated method stub
+
+			}
+
+			@Override
+			public void windowIconified(WindowEvent arg0) {
+				// TODO Auto-generated method stub
+
+			}
+
+			@Override
+			public void windowOpened(WindowEvent arg0) {
+				System.out.println("Window is opened!");
+
+			}
+			
+		});
 	}
 	
 	public void setLabel1(String text){
 		this.label1.setText(text);
 	}
-	
 	
 	
 	
@@ -74,6 +118,7 @@ public class GUIsamples extends Frame{
 		
 		window.setVisible(true);
 		window.setLabel1("Hello World!");
+
 	}
 
 }
