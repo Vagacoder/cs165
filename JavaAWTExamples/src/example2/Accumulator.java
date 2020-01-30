@@ -40,15 +40,15 @@ public class Accumulator extends Frame implements ActionListener{
         
         // This is how to close AWT window/frame
         // Solution 1 : using WindowAdapter =========================
-        // this.addWindowListener(new WindowAdapter(){
-        //     public void windowClosing(WindowEvent e){
-        //         dispose();
-        //     }
-        // });
+        this.addWindowListener(new WindowAdapter(){
+            public void windowClosing(WindowEvent e){
+                dispose();
+            }
+        });
         // ==========================================================
 
         // Solution 2: Outer window listener ========================
-            this.addWindowListener(new closeListener(this));
+            // this.addWindowListener(new closeListener(this));
         // ===========================================================
 
         this.setVisible(true);
