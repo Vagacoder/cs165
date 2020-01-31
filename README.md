@@ -49,3 +49,26 @@ It is recommended to execute the GUI setup codes in the so-called "Event-Dispatc
 To run the constructor on the event-dispatching thread, invoke * static * method `SwingUtilities.invokeLater()` to ** asynchronously queue ** the constructor on the event-dispatching thread. The codes will be run after all pending events have been processed.
 
 ** Note **: `javax.swing.SwingUtilities.invokeLater()` is a cover for `java.awt.EventQueue.invokeLater()`
+
+### 5. JavaFX set up
+1. Download javaFX sdk [here](https://openjfx.io/), and extract anywhere you want. Either somewhere as public library or `lib` folder inside your project. I did later one.
+2. Open your project using vscode, open `.classpath` file at the root of project. Add these below:
+```
+	<classpathentry kind="lib" path="lib/javafx-swt.jar"/>
+	<classpathentry kind="lib" path="lib/javafx.base.jar"/>
+	<classpathentry kind="lib" path="lib/javafx.controls.jar"/>
+	<classpathentry kind="lib" path="lib/javafx.fxml.jar"/>
+	<classpathentry kind="lib" path="lib/javafx.graphics.jar"/>
+	<classpathentry kind="lib" path="lib/javafx.media.jar"/>
+	<classpathentry kind="lib" path="./lib/javafx.swing.jar"/>
+	<classpathentry kind="lib" path="lib/javafx.web.jar"/>
+```
+** Note: ** Since in step 1, I extract sdk into project, so the path is `lib` folder inside project. You need change path, if you extract to different path.
+** If `.classpath` file is invisible, open `.vscode/settings.json`, change `"**/.classpath": false,` to `"**/.classpath": true,`. **
+3. Open `.vscode/launch.json`, in `configurations`, there are 1-3 settings, find the one with `"name":"Debug (Launch) - Current File"`, add a new line:
+
+	`"vmArgs": "--module-path ./lib/ --add-modules javafx.controls,javafx.fxml",`
+
+This is setting for java virtual machine. ** Note: ** `./lib` is the path where sdk locates, change it as where you extracted it.
+
+
