@@ -233,9 +233,9 @@ public class MainWindow extends JFrame implements IAccountListener {
     });
 
     // set appearance
-    getContentPane().setBackground(new Color(255, 255, 255));
-    getContentPane().setForeground(new Color(255, 255, 255));
-    getContentPane().setLayout(null);
+    this.getContentPane().setBackground(new Color(255, 255, 255));
+    this.getContentPane().setForeground(new Color(255, 255, 255));
+    this.getContentPane().setLayout(null);
 
     // * main panel settings
     mainPanel = new JPanel();
@@ -246,7 +246,7 @@ public class MainWindow extends JFrame implements IAccountListener {
     mainPanel.setBorder(null);
     mainPanel.setBackground(new Color(255, 255, 255));
     mainPanel.setFont(new Font("Lucida Grande", Font.PLAIN, 13));
-    getContentPane().add(mainPanel);
+    this.getContentPane().add(mainPanel);
     mainPanel.setLayout(null);
 
     // * Title of whole panel
