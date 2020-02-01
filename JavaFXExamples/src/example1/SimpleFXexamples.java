@@ -40,7 +40,13 @@ public class SimpleFXexamples extends Application {
     nodes.add(button1);
 
     this.button2 = new Button("Welcome!");
-    this.button2.setOnAction();
+    this.button2.setOnAction(new EventHandler<ActionEvent>() {
+      @Override
+      public void handle(ActionEvent e) {
+        System.out.println("Welcome!");
+      }
+    });
+    nodes.add(button2);
     
     stage.setTitle("Simple JavFX Application");
     stage.setScene(scene);
@@ -49,7 +55,7 @@ public class SimpleFXexamples extends Application {
 
   public static void main(String[] args) {
     System.out.println("Start running!");
-    launch(args);
+    Application.launch(args);
   }
 
 }
