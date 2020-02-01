@@ -1,6 +1,16 @@
 # CS165 Software Design Pattern
 ### 2020/01/20
 
+## 0. Some problems and solutions
+1. Display problem
+Get linux warning: 
+`Exception in thread "main" java.lang.reflect.InvocationTargetException`
+`Caused by: java.lang.UnsupportedOperationException: Unable to open DISPLAY`
+
+Solution:
+`$ export DISPLAY=:0`
+
+
 ### 1. 2020/01/20 
 Project: Factory and Observer
 
