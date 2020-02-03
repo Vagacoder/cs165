@@ -64,6 +64,7 @@ public class AccountManager extends IAccountManager {
       this.feedbackMessage = "Warning: Please select an account!";
     }
     this.fireAccountUpdated();
+    this.fireMessageUpdated();
   }
 
   @Override
@@ -106,6 +107,7 @@ public class AccountManager extends IAccountManager {
       this.feedbackMessage = "Warning: Please select an account!";
     }
     this.fireAccountUpdated();
+    this.fireMessageUpdated();
   }
 
   @Override
@@ -128,6 +130,7 @@ public class AccountManager extends IAccountManager {
       this.feedbackMessage = "Warning: Please select an account!";
     }
     this.fireAccountUpdated();
+    this.fireMessageUpdated();
   }
 
 }
