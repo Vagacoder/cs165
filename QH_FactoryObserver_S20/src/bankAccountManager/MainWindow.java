@@ -119,7 +119,7 @@ public class MainWindow extends JFrame implements IAccountListener {
       println(amountInCent);
 
       int selectedIndex = this.accountsView.getSelectedIndex();
-      this.accountManager.deposite(selectedIndex, amountInCent);
+      this.accountManager.deposit(selectedIndex, amountInCent);
     } catch (Exception ex) {
       println("System warning: Wrong input!");
     }
@@ -338,7 +338,7 @@ public class MainWindow extends JFrame implements IAccountListener {
     mainPanel.add(amountTextField);
     amountTextField.setColumns(10);
 
-    // * Deposite button
+    // * Deposit button
     depositButton = new JButton("DEPOSIT");
     depositButton.addActionListener(new ActionListener() {
       @Override
@@ -396,7 +396,7 @@ public class MainWindow extends JFrame implements IAccountListener {
 
   @Override
   public void updateAccount(IAccountManager source) {
-    ArrayList<IAccount> accountsList = source.getAllAccouts();
+    ArrayList<IAccount> accountsList = source.getAllAccounts();
     int N = accountsList.size();
     String[] accountNames = new String[N];
     String[] xLabelsForChart = new String[N];
@@ -419,6 +419,11 @@ public class MainWindow extends JFrame implements IAccountListener {
   public void updateMessage(IAccountManager source) {
     String message = source.getFeedbackMessage();
     println(message);
+  }
+
+  @Override
+  public void updateTransaction(IAccountManager source) {
+    ArrayList<Transaction> trans = source.getTransactions();
   }
 
 }

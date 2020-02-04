@@ -1,10 +1,15 @@
 package bankAccount;
 
+import java.util.ArrayList;
+import java.util.Date;
+
 public class CDAccount extends IAccount {
 
+    private ArrayList<Transaction> transactions;
     // constructors
     public CDAccount() {
         this.acctType = "CD";
+        this.transactions = new ArrayList<>();
     }
 
     public CDAccount(int startBalanceInCent) {
@@ -38,17 +43,26 @@ public class CDAccount extends IAccount {
     }
 
     @Override
-    public void deposite(int amountInCent) {
+    public void deposit(int amountInCent) {
         this.balanceInCent += amountInCent;
+        Transaction newTrans = new Transaction(amountInCent, new Date(), this.balanceInCent, "DEPOSIT");
+        this.transactions.add(newTrans);
     }
 
     @Override
     public void withdraw(int amountInCent) {
         if (this.balanceInCent >= amountInCent) {
             this.balanceInCent -= amountInCent;
+            Transaction newTrans = new Transaction(amountInCent, new Date(), this.balanceInCent, "WITHDRAW");
+            this.transactions.add(newTrans);
         } else {
             throw new IllegalArgumentException();
         }
+    }
+
+    @Override
+    public ArrayList<Transaction> getTransactions() {
+        return this.transactions;
     }
 
 }

@@ -4,6 +4,7 @@ import static sbcc.Core.*;
 import java.awt.*;
 import java.awt.event.*;
 import java.util.ArrayList;
+import java.util.Date;
 
 import javax.swing.*;
 import javax.swing.border.Border;
@@ -31,10 +32,11 @@ public class MainWindowNew extends JFrame implements IAccountListener {
   private JScrollPane accountListDisplayPanel;
   private JList<String> accountsView;
   private JButton removeButton;
+  private JButton transactionButton;
   private JTextField amountTextField;
   private JButton depositButton;
   private JButton withdrawButton;
-  private JTextArea messageField;
+  private JLabel messageField;
   private JScrollPane transactionListDisplayPanel;
   private JList<String> transactionsView;
 
@@ -64,8 +66,8 @@ public class MainWindowNew extends JFrame implements IAccountListener {
     this.operationPanel = new JPanel();
     // this.operationPanel.setBorder(BorderFactory.createEmptyBorder(5, 5, 5, 5));
     // this.operationPanel.setBounds(10, 100, 300, 320);
-    this.operationPanel.setPreferredSize(new Dimension(500, 630));
-    this.operationPanel.setMinimumSize(new Dimension(500, 625));
+    this.operationPanel.setPreferredSize(new Dimension(500, 640));
+    this.operationPanel.setMinimumSize(new Dimension(500, 635));
     this.operationPanel.setLayout(new BoxLayout(this.operationPanel, BoxLayout.PAGE_AXIS));
 
     // * Account Type List Dropdown Menu and ADD button
@@ -85,8 +87,9 @@ public class MainWindowNew extends JFrame implements IAccountListener {
     this.accountTypesView = new JComboBox<String>(accountTypesModel);
     accountTypesView.setBorder(null);
     accountTypesView.setForeground(new Color(51, 51, 51));
-    accountTypesView.setFont(new Font("Lucida Grande", Font.PLAIN, 16));
+    accountTypesView.setFont(new Font("Lucida Grande", Font.PLAIN, 14));
     accountTypesView.setBounds(10, 67, 207, 32);
+    accountTypesView.setPrototypeDisplayValue("0 - MoneyMarket");
     accountTypeListPanel.add(accountTypesView);
 
     // ADD botton
@@ -106,10 +109,9 @@ public class MainWindowNew extends JFrame implements IAccountListener {
     accountTypeListPanel.add(addButton);
     this.operationPanel.add(accountTypeListPanel);
 
-    // * Account List and REMOVE Buttons
+    // * Account List and REMOVE, TRANSACTION Buttons
     var accountListPanel = new JPanel();
-    accountListPanel.setBorder(BorderFactory.createCompoundBorder(
-      BorderFactory.createTitledBorder("Accounts List"),
+    accountListPanel.setBorder(BorderFactory.createCompoundBorder(BorderFactory.createTitledBorder("Accounts List"),
         BorderFactory.createEmptyBorder(5, 5, 5, 5)));
 
     // account list display subpanel
@@ -117,14 +119,14 @@ public class MainWindowNew extends JFrame implements IAccountListener {
     accountListDisplayPanel.setBorder(new LineBorder(new Color(204, 204, 204), 1, true));
     accountListDisplayPanel.setForeground(new Color(0, 0, 0));
     accountListDisplayPanel.setBackground(new Color(255, 255, 255));
-    accountListDisplayPanel.setBounds(10, 113, 402, 78);
+    accountListDisplayPanel.setPreferredSize(new Dimension(300, 80));
     accountListPanel.add(accountListDisplayPanel);
     this.operationPanel.add(accountListPanel);
 
     // Real account list
     accountsView = new JList<String>(accountsModel);
     accountsView.setLocation(24, 0);
-    accountsView.setFont(new Font("Lucida Grande", Font.PLAIN, 16));
+    accountsView.setFont(new Font("Lucida Grande", Font.PLAIN, 14));
     accountsView.setForeground(new Color(51, 51, 51));
     accountsView.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
     accountsView.setBorder(new EmptyBorder(8, 8, 8, 8));
@@ -147,11 +149,26 @@ public class MainWindowNew extends JFrame implements IAccountListener {
     removeButton.setBounds(325, 68, 90, 33);
     accountListPanel.add(removeButton);
 
-    // * Amount panel: AMOUNT Inputfield, DEPOSITE, WITHDRAW buttons
+    // TRANSACTION button
+    transactionButton = new JButton("TRANS");
+    transactionButton.addActionListener(new ActionListener() {
+      @Override
+      public void actionPerformed(ActionEvent e) {
+        do_transactionButton_actionPerformed(e);
+      }
+    });
+    transactionButton.setOpaque(true);
+    transactionButton.setFocusPainted(false);
+    transactionButton.setForeground(new Color(51, 51, 51));
+    transactionButton.setFont(new Font("Lucida Grande", Font.PLAIN, 12));
+    transactionButton.setBackground(new Color(255, 255, 255));
+    transactionButton.setBounds(325, 68, 90, 33);
+    accountListPanel.add(transactionButton);
+
+    // * Amount panel: AMOUNT Inputfield, DEPOSIT, WITHDRAW buttons
     var amountPanel = new JPanel();
-    amountPanel.setBorder(BorderFactory.createCompoundBorder(
-      BorderFactory.createTitledBorder("Amount ($)"),
-    BorderFactory.createEmptyBorder(5, 5, 5, 5)));
+    amountPanel.setBorder(BorderFactory.createCompoundBorder(BorderFactory.createTitledBorder("Amount ($)"),
+        BorderFactory.createEmptyBorder(5, 5, 5, 5)));
 
     // Input field for amount
     amountTextField = new JTextField();
@@ -161,9 +178,10 @@ public class MainWindowNew extends JFrame implements IAccountListener {
     amountTextField.setText("20");
     amountTextField.setBounds(426, 113, 232, 33);
     amountTextField.setColumns(10);
+    amountTextField.setBorder(BorderFactory.createLoweredBevelBorder());
     amountPanel.add(amountTextField);
 
-    // Deposite button
+    // Deposit button
     depositButton = new JButton("DEPOSIT");
     depositButton.addActionListener(new ActionListener() {
       @Override
@@ -196,22 +214,9 @@ public class MainWindowNew extends JFrame implements IAccountListener {
     amountPanel.add(withdrawButton);
     this.operationPanel.add(amountPanel);
 
-    // * Message Panel
-    var messagePanel = new JPanel();
-    messagePanel.setBorder(BorderFactory.createCompoundBorder(
-      BorderFactory.createTitledBorder("System Feedback"),
-    BorderFactory.createEmptyBorder(5, 5, 5, 5)));
-
-    this.messageField = new JTextArea("", 2, 40);
-    this.messageField.setEditable(false);
-    this.messageField.setBorder(BorderFactory.createLoweredBevelBorder());
-    messagePanel.add(this.messageField);
-    this.operationPanel.add(messagePanel);
-
     // * Transcation Panel
     var transactionListPanel = new JPanel();
-    transactionListPanel.setBorder(BorderFactory.createCompoundBorder(
-      BorderFactory.createTitledBorder("Transactions"),
+    transactionListPanel.setBorder(BorderFactory.createCompoundBorder(BorderFactory.createTitledBorder("Transactions"),
         BorderFactory.createEmptyBorder(5, 5, 5, 5)));
 
     // transaction list display subpanel
@@ -220,15 +225,14 @@ public class MainWindowNew extends JFrame implements IAccountListener {
     transactionListDisplayPanel.setForeground(new Color(0, 0, 0));
     transactionListDisplayPanel.setBackground(new Color(255, 255, 255));
     // transactionListDisplayPanel.setBounds(10, 113, 402, 78);
-    transactionListDisplayPanel.setSize(new Dimension(500, 100));
+    transactionListDisplayPanel.setPreferredSize(new Dimension(460, 200));
     transactionListPanel.add(transactionListDisplayPanel);
     this.operationPanel.add(transactionListPanel);
-    
 
     // Real transaction list
     transactionsView = new JList<String>(transactionsModel);
     transactionsView.setLocation(24, 0);
-    transactionsView.setFont(new Font("Lucida Grande", Font.PLAIN, 16));
+    transactionsView.setFont(new Font("Courier", Font.PLAIN, 13));
     transactionsView.setForeground(new Color(51, 51, 51));
     transactionsView.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
     transactionsView.setBorder(new EmptyBorder(8, 8, 8, 8));
@@ -236,12 +240,19 @@ public class MainWindowNew extends JFrame implements IAccountListener {
     transactionsView.setSize(new Dimension(500, 100));
     transactionListDisplayPanel.setViewportView(transactionsView);
 
+    // * Message Panel
+    var messagePanel = new JPanel();
+    messagePanel.setBorder(BorderFactory.createCompoundBorder(BorderFactory.createTitledBorder("System Log"),
+        BorderFactory.createEmptyBorder(5, 5, 5, 5)));
+
+    this.messageField = new JLabel("");
+    messagePanel.add(this.messageField);
+    this.operationPanel.add(messagePanel);
 
     // ** Balance panel (right panel)
     balancePanel = new JPanel();
-    balancePanel.setBorder(BorderFactory.createCompoundBorder(
-      BorderFactory.createTitledBorder("BALANCES"),
-    BorderFactory.createEmptyBorder(5, 5, 5, 5)));
+    balancePanel.setBorder(BorderFactory.createCompoundBorder(BorderFactory.createTitledBorder("BALANCES"),
+        BorderFactory.createEmptyBorder(5, 5, 5, 5)));
 
     // * Draw on right panel
     this.initChart();
@@ -258,7 +269,7 @@ public class MainWindowNew extends JFrame implements IAccountListener {
     rootPanel.add(balancePanel, BorderLayout.EAST);
     rootPane.add(rootPanel);
     this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-    this.setSize(1200, 650);
+    this.setSize(1200, 700);
     this.setVisible(true);
   }
 
@@ -287,6 +298,12 @@ public class MainWindowNew extends JFrame implements IAccountListener {
 
   }
 
+  protected void do_this_windowOpened(WindowEvent e) {
+    this.transactionsModel.removeAllElements();
+    ;
+    this.transactionsModel.addElement(String.format("%s%30s%20s%20s", "Date", "Amount", "Operation", "Balance"));
+  }
+
   protected void do_addButton_actionPerformed(ActionEvent e) {
     String selectedAccountType = String.valueOf(this.accountTypesView.getSelectedItem());
     println(selectedAccountType);
@@ -309,6 +326,11 @@ public class MainWindowNew extends JFrame implements IAccountListener {
     this.accountManager.removeSelectedAccount(selectedIndex);
   }
 
+  protected void do_transactionButton_actionPerformed(ActionEvent e){
+    int selectedIndex = this.accountsView.getSelectedIndex();
+    this.accountManager.showAcctTransactions(selectedIndex);
+  }
+
   protected void do_depositButton_actionPerformed(ActionEvent e) {
     String inputAmount = this.amountTextField.getText();
     println(inputAmount);
@@ -318,7 +340,7 @@ public class MainWindowNew extends JFrame implements IAccountListener {
       println(amountInCent);
 
       int selectedIndex = this.accountsView.getSelectedIndex();
-      this.accountManager.deposite(selectedIndex, amountInCent);
+      this.accountManager.deposit(selectedIndex, amountInCent);
     } catch (Exception ex) {
       println("System warning: Wrong input!");
     }
@@ -341,7 +363,7 @@ public class MainWindowNew extends JFrame implements IAccountListener {
 
   @Override
   public void updateAccount(IAccountManager source) {
-    ArrayList<IAccount> accountsList = source.getAllAccouts();
+    ArrayList<IAccount> accountsList = source.getAllAccounts();
     int N = accountsList.size();
     String[] accountNames = new String[N];
     String[] xLabelsForChart = new String[N];
@@ -365,6 +387,13 @@ public class MainWindowNew extends JFrame implements IAccountListener {
     println("Update Message");
     String message = source.getFeedbackMessage();
     this.messageField.setText(message);
+    if(message.startsWith("Warning")){
+      this.messageField.setForeground(Color.magenta);
+    } else if(message.startsWith("Error")){
+      this.messageField.setForeground(Color.RED);
+    } else {
+      this.messageField.setForeground(Color.BLACK);
+    }
     println(message);
   }
 
@@ -378,6 +407,30 @@ public class MainWindowNew extends JFrame implements IAccountListener {
     chartModel.clear();
     for (int ndx = 0; ndx < xLabels.length; ndx++)
       chartModel.setValue(yValues[ndx], "", xLabels[ndx]);
+  }
+
+  @Override
+  public void updateTransaction(IAccountManager source) {
+    ArrayList<Transaction> trans = source.getTransactions();
+    this.transactionsModel.removeAllElements();
+    ;
+    this.transactionsModel.addElement(String.format("%s%20s%14s%16s", "Date", "Amount", "Operation", "Balance"));
+    for (var tran : trans) {
+      Date date = tran.getDate();
+      int year = 1900 + date.getYear();
+      int month = 1 + date.getMonth();
+      int day = date.getDate();
+      String dateStr = year + "-" + month + "-" + day;
+      String amount = getMoneyString(tran.getAmountInCent());
+      String balance = getMoneyString(tran.getBalanceAfter());
+      this.transactionsModel.addElement(String.format("%s%16s%14s%16s", dateStr, amount, tran.getOperation(), balance));
+    }
+  }
+
+  public static String getMoneyString(int amountInCent) {
+    int dollars = amountInCent / 100;
+    int cents = amountInCent % 100;
+    return dollars + "." + cents;
   }
 
   public static void main(String[] args) {

@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import static sbcc.Core.*;
 
 import bankAccount.IAccount;
+import bankAccount.Transaction;
 
 public class AccountManager extends IAccountManager {
 
@@ -37,6 +38,13 @@ public class AccountManager extends IAccountManager {
   };
 
   @Override
+  public void fireTransactionUpdated() {
+    for (IAccountListener listener : this.accountListeners) {
+      listener.updateTransaction(this);
+    }
+  }
+
+  @Override
   public String getFeedbackMessage() {
     return this.feedbackMessage;
   }
@@ -46,8 +54,8 @@ public class AccountManager extends IAccountManager {
     this.accountList.add(account);
     this.selectedAccountIndex = -1;
     println("System warning: Account added!");
-    this.feedbackMessage = "A new acount: " + account.getAcctType() + 
-      " is added successfully.";
+    this.feedbackMessage = "A new acount: " + account.getAcctType() + " is added successfully.";
+    this.fireMessageUpdated();
   }
 
   @Override
@@ -57,14 +65,14 @@ public class AccountManager extends IAccountManager {
       IAccount removedAcct = this.accountList.remove(this.selectedAccountIndex);
       this.selectedAccountIndex = -1;
       println("System warning: Account removed!");
-      this.feedbackMessage = "A account: " + removedAcct.getAcctType() + 
-        " is removed successfully.";
+      this.feedbackMessage = "A account: " + removedAcct.getAcctType() + " is removed successfully.";
     } else {
       println("System warning: Please select an account!");
       this.feedbackMessage = "Warning: Please select an account!";
     }
     this.fireAccountUpdated();
     this.fireMessageUpdated();
+    this.fireTransactionUpdated();
   }
 
   @Override
@@ -84,7 +92,7 @@ public class AccountManager extends IAccountManager {
   }
 
   @Override
-  public ArrayList<IAccount> getAllAccouts() {
+  public ArrayList<IAccount> getAllAccounts() {
     return this.accountList;
   }
 
@@ -93,21 +101,21 @@ public class AccountManager extends IAccountManager {
   }
 
   @Override
-  public void deposite(int indexOfAccount, int amountInCent) {
+  public void deposit(int indexOfAccount, int amountInCent) {
     this.setSelectedAccount(indexOfAccount);
     if (this.selectedAccountIndex >= 0) {
       IAccount selectedAcct = this.accountList.get(this.selectedAccountIndex);
-      selectedAcct.deposite(amountInCent);
-      int dollars = amountInCent /10;
-      int cents = amountInCent % 10;
-      this.feedbackMessage = "$"+ dollars + "." + cents + " is deposited to " + 
-        (this.selectedAccountIndex + 1) + " - " + selectedAcct.getAcctType();
+      selectedAcct.deposit(amountInCent);
+      String amount = MainWindowNew.getMoneyString(amountInCent);
+      this.feedbackMessage = "$" + amount + " is deposited to " + (this.selectedAccountIndex + 1) + " - "
+          + selectedAcct.getAcctType();
     } else {
       println("System warning: Please select an account!");
       this.feedbackMessage = "Warning: Please select an account!";
     }
     this.fireAccountUpdated();
     this.fireMessageUpdated();
+    this.fireTransactionUpdated();
   }
 
   @Override
@@ -117,10 +125,10 @@ public class AccountManager extends IAccountManager {
       IAccount selectedAcct = this.accountList.get(this.selectedAccountIndex);
       if (selectedAcct.getBalanceInCent() >= amountInCent) {
         selectedAcct.withdraw(amountInCent);
-        int dollars = amountInCent /10;
+        int dollars = amountInCent / 10;
         int cents = amountInCent % 10;
-        this.feedbackMessage = "$"+ dollars + "." + cents + " is withdrawed from " + 
-          (this.selectedAccountIndex + 1) + " - " + selectedAcct.getAcctType();
+        this.feedbackMessage = "$" + dollars + "." + cents + " is withdrawed from " + (this.selectedAccountIndex + 1)
+            + " - " + selectedAcct.getAcctType();
       } else {
         println("System warning: Not enough money!");
         this.feedbackMessage = "Error: Not enough money in this account!";
@@ -131,6 +139,28 @@ public class AccountManager extends IAccountManager {
     }
     this.fireAccountUpdated();
     this.fireMessageUpdated();
+    this.fireTransactionUpdated();
+  }
+
+  @Override
+  public ArrayList<Transaction> getTransactions() {
+    if (this.selectedAccountIndex >= 0) {
+      IAccount selectedAcct = this.accountList.get(this.selectedAccountIndex);
+      return selectedAcct.getTransactions();
+    } else {
+      return new ArrayList<Transaction>();
+    }
+
+  }
+
+  @Override
+  public void showAcctTransactions(int indexOfAccount) {
+    this.setSelectedAccount(indexOfAccount);
+    if (this.selectedAccountIndex >= 0) {
+      this.fireTransactionUpdated();
+    } else {
+      this.feedbackMessage = "Warning: Please select an account!";
+    }
   }
 
 }

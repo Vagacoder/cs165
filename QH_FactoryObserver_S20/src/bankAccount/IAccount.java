@@ -1,5 +1,7 @@
 package bankAccount;
 
+import java.util.ArrayList;
+
 public abstract class IAccount {
 
     protected String acctName;
@@ -14,8 +16,10 @@ public abstract class IAccount {
 
     public abstract int getBalanceInCent();
 
-    public abstract void deposite(int amountInCent);
+    public abstract void deposit(int amountInCent);
 
     public abstract void withdraw(int amountInCent);
+
+    public abstract ArrayList<Transaction> getTransactions();
 
 }
