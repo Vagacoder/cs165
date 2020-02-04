@@ -7,7 +7,6 @@ import java.util.ArrayList;
 import java.util.Date;
 
 import javax.swing.*;
-import javax.swing.border.Border;
 import javax.swing.border.EmptyBorder;
 import javax.swing.border.LineBorder;
 
@@ -64,8 +63,6 @@ public class MainWindowNew extends JFrame implements IAccountListener {
     // **** Setting up UI
     // ** Operation panel (left panel)
     this.operationPanel = new JPanel();
-    // this.operationPanel.setBorder(BorderFactory.createEmptyBorder(5, 5, 5, 5));
-    // this.operationPanel.setBounds(10, 100, 300, 320);
     this.operationPanel.setPreferredSize(new Dimension(500, 640));
     this.operationPanel.setMinimumSize(new Dimension(500, 635));
     this.operationPanel.setLayout(new BoxLayout(this.operationPanel, BoxLayout.PAGE_AXIS));
@@ -74,7 +71,8 @@ public class MainWindowNew extends JFrame implements IAccountListener {
     var accountTypeListPanel = new JPanel();
     accountTypeListPanel.setBorder(BorderFactory.createCompoundBorder(BorderFactory.createTitledBorder("Account Types"),
         BorderFactory.createEmptyBorder(5, 5, 5, 5)));
-
+    accountTypeListPanel.setLayout(new FlowLayout());
+      
     // pre-set account types
     ArrayList<String> accountTypes = new ArrayList<String>();
     accountTypes.add("CD");
@@ -88,8 +86,9 @@ public class MainWindowNew extends JFrame implements IAccountListener {
     accountTypesView.setBorder(null);
     accountTypesView.setForeground(new Color(51, 51, 51));
     accountTypesView.setFont(new Font("Lucida Grande", Font.PLAIN, 14));
-    accountTypesView.setBounds(10, 67, 207, 32);
+    accountTypesView.setBorder(new EmptyBorder(10, 10, 10, 10));
     accountTypesView.setPrototypeDisplayValue("0 - MoneyMarket");
+    accountTypesView.setPreferredSize(new Dimension(220,45));
     accountTypeListPanel.add(accountTypesView);
 
     // ADD botton
@@ -105,7 +104,6 @@ public class MainWindowNew extends JFrame implements IAccountListener {
     addButton.setForeground(new Color(51, 51, 51));
     addButton.setFont(new Font("Lucida Grande", Font.PLAIN, 12));
     addButton.setBackground(new Color(255, 255, 255));
-    addButton.setBounds(223, 68, 90, 33);
     accountTypeListPanel.add(addButton);
     this.operationPanel.add(accountTypeListPanel);
 
@@ -113,13 +111,14 @@ public class MainWindowNew extends JFrame implements IAccountListener {
     var accountListPanel = new JPanel();
     accountListPanel.setBorder(BorderFactory.createCompoundBorder(BorderFactory.createTitledBorder("Accounts List"),
         BorderFactory.createEmptyBorder(5, 5, 5, 5)));
+    accountListPanel.setLayout(new FlowLayout());
 
     // account list display subpanel
     this.accountListDisplayPanel = new JScrollPane();
     accountListDisplayPanel.setBorder(new LineBorder(new Color(204, 204, 204), 1, true));
     accountListDisplayPanel.setForeground(new Color(0, 0, 0));
     accountListDisplayPanel.setBackground(new Color(255, 255, 255));
-    accountListDisplayPanel.setPreferredSize(new Dimension(300, 80));
+    accountListDisplayPanel.setPreferredSize(new Dimension(300, 70));
     accountListPanel.add(accountListDisplayPanel);
     this.operationPanel.add(accountListPanel);
 
@@ -133,8 +132,12 @@ public class MainWindowNew extends JFrame implements IAccountListener {
     accountsView.setBackground(new Color(255, 255, 255));
     accountListDisplayPanel.setViewportView(accountsView);
 
+    // SUbpanel for Buttons
+    var buttonPanel = new JPanel();
+    buttonPanel.setLayout(new BoxLayout(buttonPanel, BoxLayout.Y_AXIS));
+    accountListPanel.add(buttonPanel);
     // REMOVE button
-    removeButton = new JButton("REMOVE");
+    removeButton = new JButton("    REMOVE    ");
     removeButton.addActionListener(new ActionListener() {
       @Override
       public void actionPerformed(ActionEvent e) {
@@ -146,11 +149,13 @@ public class MainWindowNew extends JFrame implements IAccountListener {
     removeButton.setForeground(new Color(51, 51, 51));
     removeButton.setFont(new Font("Lucida Grande", Font.PLAIN, 12));
     removeButton.setBackground(new Color(255, 255, 255));
-    removeButton.setBounds(325, 68, 90, 33);
-    accountListPanel.add(removeButton);
+    removeButton.setPreferredSize(new Dimension(170, 25));
+    removeButton.setAlignmentX(CENTER_ALIGNMENT);
+    buttonPanel.add(removeButton);
+    buttonPanel.add(Box.createRigidArea(new Dimension(0,10)));
 
     // TRANSACTION button
-    transactionButton = new JButton("TRANS");
+    transactionButton = new JButton("TRANSACTION");
     transactionButton.addActionListener(new ActionListener() {
       @Override
       public void actionPerformed(ActionEvent e) {
@@ -162,8 +167,10 @@ public class MainWindowNew extends JFrame implements IAccountListener {
     transactionButton.setForeground(new Color(51, 51, 51));
     transactionButton.setFont(new Font("Lucida Grande", Font.PLAIN, 12));
     transactionButton.setBackground(new Color(255, 255, 255));
-    transactionButton.setBounds(325, 68, 90, 33);
-    accountListPanel.add(transactionButton);
+    transactionButton.setPreferredSize(new Dimension(170, 25));
+    transactionButton.setAlignmentX(CENTER_ALIGNMENT);
+    buttonPanel.add(transactionButton);
+    
 
     // * Amount panel: AMOUNT Inputfield, DEPOSIT, WITHDRAW buttons
     var amountPanel = new JPanel();
@@ -326,7 +333,7 @@ public class MainWindowNew extends JFrame implements IAccountListener {
     this.accountManager.removeSelectedAccount(selectedIndex);
   }
 
-  protected void do_transactionButton_actionPerformed(ActionEvent e){
+  protected void do_transactionButton_actionPerformed(ActionEvent e) {
     int selectedIndex = this.accountsView.getSelectedIndex();
     this.accountManager.showAcctTransactions(selectedIndex);
   }
@@ -387,9 +394,9 @@ public class MainWindowNew extends JFrame implements IAccountListener {
     println("Update Message");
     String message = source.getFeedbackMessage();
     this.messageField.setText(message);
-    if(message.startsWith("Warning")){
+    if (message.startsWith("Warning")) {
       this.messageField.setForeground(Color.magenta);
-    } else if(message.startsWith("Error")){
+    } else if (message.startsWith("Error")) {
       this.messageField.setForeground(Color.RED);
     } else {
       this.messageField.setForeground(Color.BLACK);

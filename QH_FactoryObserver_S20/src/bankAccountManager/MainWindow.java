@@ -4,17 +4,10 @@ import static sbcc.Core.*;
 
 import java.awt.*;
 import java.awt.event.*;
-import java.time.*;
 import java.util.*;
-
 import javax.swing.*;
-
-import static java.lang.Math.*;
-import static java.lang.System.*;
-import static org.apache.commons.lang3.StringUtils.*;
 import javax.swing.border.LineBorder;
 import javax.swing.border.EmptyBorder;
-import javax.swing.event.ListSelectionListener;
 
 import org.jfree.chart.*;
 import org.jfree.chart.plot.*;
@@ -23,7 +16,6 @@ import org.jfree.data.category.*;
 
 import bankAccount.*;
 
-import javax.swing.event.ListSelectionEvent;
 
 public class MainWindow extends JFrame implements IAccountListener {
 
@@ -424,6 +416,7 @@ public class MainWindow extends JFrame implements IAccountListener {
   @Override
   public void updateTransaction(IAccountManager source) {
     ArrayList<Transaction> trans = source.getTransactions();
+    println(trans.size());
   }
 
 }
