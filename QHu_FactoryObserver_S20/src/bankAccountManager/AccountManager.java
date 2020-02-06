@@ -1,6 +1,10 @@
 package bankAccountManager;
 
 import java.util.ArrayList;
+
+import javax.swing.JFrame;
+import javax.swing.JOptionPane;
+
 import static sbcc.Core.*;
 
 import bankAccount.IAccount;
@@ -59,13 +63,18 @@ public class AccountManager extends IAccountManager {
   }
 
   @Override
-  public void removeSelectedAccount(int indexOfAccount) {
+  public void removeSelectedAccount(JFrame mainWindow, int indexOfAccount) {
     this.setSelectedAccount(indexOfAccount);
     if (this.selectedAccountIndex >= 0 && this.selectedAccountIndex < this.accountList.size()) {
-      IAccount removedAcct = this.accountList.remove(this.selectedAccountIndex);
-      this.selectedAccountIndex = -1;
-      println("System warning: Account removed!");
-      this.feedbackMessage = "A account: " + removedAcct.getAcctType() + " is removed successfully.";
+      int userConfirmation = JOptionPane.showConfirmDialog(mainWindow,
+          "Are you sure to PERMANENTLY REMOVE this account?", "Warning!", JOptionPane.OK_CANCEL_OPTION);
+
+      if (userConfirmation == 0) {
+        IAccount removedAcct = this.accountList.remove(this.selectedAccountIndex);
+        this.selectedAccountIndex = -1;
+        println("System warning: Account removed!");
+        this.feedbackMessage = "A account: " + removedAcct.getAcctType() + " is removed successfully.";
+      }
     } else {
       println("System warning: Please select an account!");
       this.feedbackMessage = "Warning: Please select an account!";

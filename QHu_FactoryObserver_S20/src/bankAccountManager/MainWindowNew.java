@@ -330,7 +330,7 @@ public class MainWindowNew extends JFrame implements IAccountListener {
 
   protected void do_removeButton_actionPerformed(ActionEvent e) {
     int selectedIndex = this.accountsView.getSelectedIndex();
-    this.accountManager.removeSelectedAccount(selectedIndex);
+    this.accountManager.removeSelectedAccount(this, selectedIndex);
   }
 
   protected void do_transactionButton_actionPerformed(ActionEvent e) {

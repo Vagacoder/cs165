@@ -1,6 +1,9 @@
 package bankAccountManager;
 
 import java.util.ArrayList;
+
+import javax.swing.JFrame;
+
 import bankAccount.IAccount;
 import bankAccount.Transaction;
 
@@ -20,7 +23,7 @@ public abstract class IAccountManager {
 
     public abstract void addAccount(IAccount account);
 
-    public abstract void removeSelectedAccount(int indexOfAccount);
+    public abstract void removeSelectedAccount(JFrame mainWindow, int indexOfAccount);
 
     public abstract IAccount getAccount(int index);
 
