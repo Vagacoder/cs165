@@ -86,10 +86,35 @@ This is setting for java virtual machine. ** Note: ** `./lib` is the path where 
 2. JavaFX provides a huge set of controls (or components) in package `javafx.scene.control`, including `Label`, `Button` and `TextField`.
 3. JavaFX comonents hierarchical diagram:
 
+![javafx diagram](./JavaFX_StageScene.png)
+
+3.1. Details of components
 `Application` (with **abstract** function `start()`, your class must to **override** it) -> 
 `Stage` (argument of `start()` of `Application`, has `setTitle()`, `show()`, `setScene()`) -> 
-`Scene` (argument of `setScene()` of `Stage`), has constructor taking `Panel` as *Root Node*: `new Scene(panel, width, height)` ) -> 
-`Panel` (argment of `new Scene()`, has `getChildren()` which returns a list  of `Node`. Panel is **Root Node**, other leaf nodes can be added, also **layout** is set here by choosing different types of panel) -> 
+`Scene` (argument of `setScene()` of `Stage`), has constructor taking `Pane` as *Root Node*: `new Scene(panel, width, height)` ) -> 
+`Pane` (argment of `new Scene()`, has `getChildren()` which returns a list  of `Node`. Pane is **Root Node**, other leaf nodes can be added, also **layout** is set here by choosing different types of pane) -> 
 `Components` (added by `Panel.getChildren().add()`)
 
+3.2. `Application` and its Life Cycle
+A JavaFX application extends from javafx.application.Application. The JavaFX runtime maintains an Application's life cycle as follows:
+
+    1. It constructs an instance of Application.
+    2. It calls the Application's `init()` method.
+    3. It calls the Application's `start(javafx.stage.Stage)` method, and passes the primary stage as its argument.
+    4. It waits for the Application to complete (e.g., via `Platform.exit()`, or closing all the windows).
+    5. It calls the Application's `stop()` method.
+
+3.3. `Stage`
+JavaFX uses the metaphor of a theater to model the graphics application. A stage (defined by the javafx.stage.Stage class) represents the **top-level container**, typically a window. The UI elements such as controls (or components) are contained in a scene (defined by the javafx.scene.Scene class). An application can have more than one scenes, but only one of the scenes can be displayed on the stage at any given time.
+
+A stage is divided into decoration (title bar and border) and the content area. A stage can have one of these styles:
+
+    StageStyle.DECORATED: solid white background with decorations
+    StageStyle.UNDECORATED: solid white background with no decorations
+    StageStyle.TRANSPARENT: transparent background with no decorations
+    StageStyle.UTILITY: solid white background with minimal decorations
+
+A primary stage is created by the **JavaFX runtime**, and passed into the Application as an argument in the Application's start() method.
+
 4. To start an Application (a class implements Application), call static method: `Appliaction.launch(arg)`;
+
