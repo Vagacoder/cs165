@@ -1,0 +1,18 @@
+c:\users\stephenstrenn\documents\visual studio 2013\Projects\IteratorThreadSafe\IteratorThreadSafe\bin\Debug\IteratorThreadSafe.exe.config
+c:\users\stephenstrenn\documents\visual studio 2013\Projects\IteratorThreadSafe\IteratorThreadSafe\bin\Debug\IteratorThreadSafe.exe
+c:\users\stephenstrenn\documents\visual studio 2013\Projects\IteratorThreadSafe\IteratorThreadSafe\bin\Debug\IteratorThreadSafe.pdb
+c:\users\stephenstrenn\documents\visual studio 2013\Projects\IteratorThreadSafe\IteratorThreadSafe\obj\Debug\IteratorThreadSafe.csprojResolveAssemblyReference.cache
+c:\users\stephenstrenn\documents\visual studio 2013\Projects\IteratorThreadSafe\IteratorThreadSafe\obj\Debug\IteratorThreadSafe.exe
+c:\users\stephenstrenn\documents\visual studio 2013\Projects\IteratorThreadSafe\IteratorThreadSafe\obj\Debug\IteratorThreadSafe.pdb
+C:\Users\stephenstrenn\Google Drive\SBCC\CS165\TestCode\IteratorThreadSafe\IteratorThreadSafe\bin\Debug\IteratorThreadSafe.exe.config
+C:\Users\stephenstrenn\Google Drive\SBCC\CS165\TestCode\IteratorThreadSafe\IteratorThreadSafe\obj\Debug\IteratorThreadSafe.exe
+C:\Users\stephenstrenn\Google Drive\SBCC\CS165\TestCode\IteratorThreadSafe\IteratorThreadSafe\obj\Debug\IteratorThreadSafe.pdb
+C:\Users\stephenstrenn\Google Drive\SBCC\CS165\TestCode\IteratorThreadSafe\IteratorThreadSafe\bin\Debug\IteratorThreadSafe.exe
+C:\Users\stephenstrenn\Google Drive\SBCC\CS165\TestCode\IteratorThreadSafe\IteratorThreadSafe\bin\Debug\IteratorThreadSafe.pdb
+C:\Users\stephenstrenn\Google Drive\SBCC\CS165\TestCode\IteratorThreadSafe\IteratorThreadSafe\obj\Debug\IteratorThreadSafe.csprojResolveAssemblyReference.cache
+C:\Users\spstrenn\Documents\temp_165\IteratorThreadSafe\IteratorThreadSafe\bin\Debug\IteratorThreadSafe.exe.config
+C:\Users\spstrenn\Documents\temp_165\IteratorThreadSafe\IteratorThreadSafe\bin\Debug\IteratorThreadSafe.exe
+C:\Users\spstrenn\Documents\temp_165\IteratorThreadSafe\IteratorThreadSafe\bin\Debug\IteratorThreadSafe.pdb
+C:\Users\spstrenn\Documents\temp_165\IteratorThreadSafe\IteratorThreadSafe\obj\Debug\IteratorThreadSafe.csprojAssemblyReference.cache
+C:\Users\spstrenn\Documents\temp_165\IteratorThreadSafe\IteratorThreadSafe\obj\Debug\IteratorThreadSafe.exe
+C:\Users\spstrenn\Documents\temp_165\IteratorThreadSafe\IteratorThreadSafe\obj\Debug\IteratorThreadSafe.pdb

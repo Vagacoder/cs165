@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<classpath>
+	<classpathentry kind="src" path="src"/>
+	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER">
+		<attributes>
+			<attribute name="module" value="true"/>
+		</attributes>
+	</classpathentry>
+	<classpathentry kind="lib" path="lib/org.eclipse.core.commands_3.6.1.v20120521-2329.jar"/>
+	<classpathentry kind="lib" path="lib/org.eclipse.core.runtime_3.8.0.v20120521-2346.jar"/>
+	<classpathentry kind="lib" path="lib/org.eclipse.equinox.common_3.6.100.v20120522-1841.jar"/>
+	<classpathentry kind="lib" path="lib/org.eclipse.equinox.registry_3.5.200.v20120522-1841.jar"/>
+	<classpathentry kind="lib" path="lib/org.eclipse.jface_3.8.0.v20120521-2329.jar"/>
+	<classpathentry kind="lib" path="lib/swt.jar"/>
+	<classpathentry kind="lib" path="lib/swt-debug.jar"/>
+	<classpathentry kind="output" path="bin"/>
+</classpath>
