@@ -32,13 +32,28 @@ SRS:
 2. Support multiple output file formats
 3. Providing compression and decompression options
 4. ...
+
+Task: 
+1. finishe UML diagram ... done
+2. skeleton the components
+3. implement algorithm and Strategy pattern
+
 */
+
+import java.io.File;
+import java.io.IOException;
+import java.nio.file.Files;
 
 public class MainWindow {
 
+    public static void main(String[] args) throws IOException {
 
-    public static void main(String[] args){
-
-
+        CompressionManager manager = new CompressionManager();
+        File infile = new File("midterm.pdf");
+        byte[] data = Files.readAllBytes(infile.toPath());
+        
+        String outputFileName = "mid.zip";
+        manager.write(outputFileName, data);
+    
     }
 }
