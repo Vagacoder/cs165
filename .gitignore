@@ -4,3 +4,5 @@
 /.recommenders/
 **/bin
 **/*.so
+JQZip/lib/
+

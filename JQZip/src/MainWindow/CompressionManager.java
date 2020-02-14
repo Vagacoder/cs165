@@ -1,25 +1,23 @@
 package MainWindow;
 
-import Compressor.Compressor;
-import Compressor.ZipCompressor;
+import Compressor.ICompressor;
 
-public class CompressionManager{
+public class CompressionManager {
 
-    
-    private Compressor compressor;
+    private ICompressor compressor;
 
-    public CompressionManager(){
+    public CompressionManager() {
 
     }
 
-    public void setCompressAlogrithm(String algo){
-        //TODO: parse algo, dynamically loading compressor class;
-        compressor = new ZipCompressor();
+    public void setCompressAlogrithm(String algo) throws Exception {
+        Class compressorClass = Class.forName("Compressor." +algo + "Compressor");
+        this.compressor = (ICompressor) compressorClass.getDeclaredConstructor()
+            .newInstance();
     }
 
-    public void write(String outputFileName, byte[] data){
+    public void write(String outputFileName, byte[] data) {
         this.compressor.write(outputFileName, data);
     }
-
 
 }

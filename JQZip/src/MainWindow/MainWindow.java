@@ -53,7 +53,11 @@ public class MainWindow {
         byte[] data = Files.readAllBytes(infile.toPath());
         
         String outputFileName = "mid.zip";
+        try{
+        manager.setCompressAlogrithm("Zip");
         manager.write(outputFileName, data);
-    
+        } catch(Exception e){
+            e.printStackTrace();
+        }
     }
 }

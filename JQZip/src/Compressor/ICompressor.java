@@ -1,6 +1,6 @@
 package Compressor;
 
 
-public interface Compressor{
+public interface ICompressor{
     public void write(String filename, byte[] data);
 }
