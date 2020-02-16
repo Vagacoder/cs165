@@ -50,12 +50,15 @@ public class MainWindow {
 
         CompressionManager manager = new CompressionManager();
         File infile = new File("midterm.pdf");
+        // File infile = new File("CS137Addresses.csv");
         byte[] data = Files.readAllBytes(infile.toPath());
         
-        String outputFileName = "mid.zip";
+        // String outputFileName = "midterm.pdf.gz";
+        // String outputFileName = "CS137Addresses.csv.gz";
+
         try{
         manager.setCompressAlogrithm("Zip");
-        manager.write(outputFileName, data);
+        manager.write(infile.getName(), data);
         } catch(Exception e){
             e.printStackTrace();
         }
