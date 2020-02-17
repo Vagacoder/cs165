@@ -25,7 +25,7 @@ many different compression formats.
 
 
 SRS: 
-1. GUI for software, (try JavaFX); 
+1. GUI for software, using Swing; 
 1.1. GUI for select input file;
 1.2. GUI for select output file;
 1.3. GUI for select format;
@@ -36,39 +36,134 @@ SRS:
 Task: 
 1. finishe UML diagram ... done
 2. skeleton the components ... done
-3. implement algorithm and Strategy pattern
+3. implement algorithm and Strategy pattern ... done
+4. GUI
 
 */
+
+import java.awt.*;
+import java.awt.event.*;
 
 import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
 
-import javax.swing.JFrame;
+import javax.swing.*;
 
-public class MainWindow extends JFrame {
+public class MainWindow extends JFrame implements ActionListener {
 
-    
+    private static final long serialVersionUID = -4165550345543619074L;
+    private File selectedFile;
+    private JLabel fileInfo;
+    private JLabel messageLabel;
+    private JButton openBtn;
+    private JButton saveBtn;
+    private JFileChooser fileChooser;
+    private CompressionManager manager;
+    private String algorithm;
+
+    public MainWindow() {
+
+        this.selectedFile = null;
+        this.fileInfo = new JLabel("No file selected");
+        this.messageLabel = new JLabel("Please select a file");
+        this.fileChooser = new JFileChooser();
+        this.manager = new CompressionManager();
+        this.algorithm = "";
+
+        // main frame
+        Container mainPane = this.getContentPane();
+        mainPane.setLayout(new FlowLayout());
+        JPanel panel = new JPanel();
+        mainPane.add(panel);
+
+        // buttons
+        this.openBtn = new JButton("Open a File");
+        this.saveBtn = new JButton("Compress a File");
+        this.saveBtn.setEnabled(false);
+        openBtn.addActionListener(this);
+        saveBtn.addActionListener(this);
+
+        panel.add(openBtn);
+        panel.add(this.fileInfo);
+        panel.add(saveBtn);
+        panel.add(new JLabel("System message:"));
+        panel.add(this.messageLabel);
+
+        this.setTitle("JQZip");
+        this.setSize(600, 400);
+        this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        this.setVisible(true);
+    }
+
+    @Override
+    public void actionPerformed(ActionEvent event) {
+        Object target = event.getSource();
+        if (target == this.openBtn) {
+            int result = this.fileChooser.showOpenDialog(this);
+            if (result == JFileChooser.APPROVE_OPTION) {
+                this.selectedFile = this.fileChooser.getSelectedFile();
+                String filePath = this.selectedFile.getPath();
+                this.fileInfo.setText(filePath);
+                this.messageLabel.setText(filePath + " is selected");
+                this.saveBtn.setEnabled(true);
+            } else {
+                this.selectedFile = null;
+                this.fileInfo.setText("No file selected");
+                this.messageLabel.setText("Cancelled by user");
+                this.saveBtn.setEnabled(false);
+            }
+
+        } else if (target == this.saveBtn) {
+            try {
+                byte[] data = Files.readAllBytes(this.selectedFile.toPath());
+                try {
+                    manager.setCompressAlogrithm("Jar");
+                    try {
+                        manager.write(this.selectedFile.getPath(), data);
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                        this.messageLabel.setText("Fail to write compressed file");
+                    }
+                } catch (Exception e) {
+                    e.printStackTrace();
+                    this.messageLabel.setText("Selected compression method does not exists.");
+                }
+
+            } catch (Exception e) {
+
+            }
+        }
+
+    }
 
     public static void main(String[] args) throws IOException {
-
-        String message = "";
-        CompressionManager manager = new CompressionManager();
-        File infile = new File("red.bmp");
-        // File infile = new File("CS137Addresses.csv");
-        byte[] data = Files.readAllBytes(infile.toPath());
-
-        try {
-            manager.setCompressAlogrithm("Jar");
-            try {
-                manager.write(infile.getName(), data);
-            } catch (Exception e) {
-                e.printStackTrace();
-                message = "Fail to write compressed file";
+        SwingUtilities.invokeLater(new Runnable() {
+            public void run() {
+                new MainWindow();
             }
-        } catch (Exception e) {
-            e.printStackTrace();
-            message = "Selected compression method does not exists.";
-        }
+        });
+
+
+        // ! No GUI part, for testing only
+        // String message = "";
+        // CompressionManager manager = new CompressionManager();
+        // File infile = new File("red.bmp");
+        // // File infile = new File("CS137Addresses.csv");
+        // byte[] data = Files.readAllBytes(infile.toPath());
+
+        // try {
+        // manager.setCompressAlogrithm("Jar");
+        // try {
+        // manager.write(infile.getName(), data);
+        // } catch (Exception e) {
+        // e.printStackTrace();
+        // message = "Fail to write compressed file";
+        // }
+        // } catch (Exception e) {
+        // e.printStackTrace();
+        // message = "Selected compression method does not exists.";
+        // }
     }
+
 }
