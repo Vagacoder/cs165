@@ -44,7 +44,11 @@ import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
 
-public class MainWindow {
+import javax.swing.JFrame;
+
+public class MainWindow extends JFrame {
+
+    
 
     public static void main(String[] args) throws IOException {
 
@@ -55,7 +59,7 @@ public class MainWindow {
         byte[] data = Files.readAllBytes(infile.toPath());
 
         try {
-            manager.setCompressAlogrithm("Tar");
+            manager.setCompressAlogrithm("Jar");
             try {
                 manager.write(infile.getName(), data);
             } catch (Exception e) {
