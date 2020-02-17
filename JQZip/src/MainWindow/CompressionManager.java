@@ -16,8 +16,8 @@ public class CompressionManager {
             .newInstance();
     }
 
-    public void write(String outputFileName, byte[] data) {
-        this.compressor.write(outputFileName, data);
+    public void write(String fileName, byte[] data) throws Exception {
+        this.compressor.write(fileName, data);
     }
 
 }

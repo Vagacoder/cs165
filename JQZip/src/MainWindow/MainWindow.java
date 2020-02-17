@@ -35,7 +35,7 @@ SRS:
 
 Task: 
 1. finishe UML diagram ... done
-2. skeleton the components
+2. skeleton the components ... done
 3. implement algorithm and Strategy pattern
 
 */
@@ -48,19 +48,23 @@ public class MainWindow {
 
     public static void main(String[] args) throws IOException {
 
+        String message = "";
         CompressionManager manager = new CompressionManager();
-        File infile = new File("midterm.pdf");
+        File infile = new File("red.bmp");
         // File infile = new File("CS137Addresses.csv");
         byte[] data = Files.readAllBytes(infile.toPath());
-        
-        // String outputFileName = "midterm.pdf.gz";
-        // String outputFileName = "CS137Addresses.csv.gz";
 
-        try{
-        manager.setCompressAlogrithm("Zip");
-        manager.write(infile.getName(), data);
-        } catch(Exception e){
+        try {
+            manager.setCompressAlogrithm("Tar");
+            try {
+                manager.write(infile.getName(), data);
+            } catch (Exception e) {
+                e.printStackTrace();
+                message = "Fail to write compressed file";
+            }
+        } catch (Exception e) {
             e.printStackTrace();
+            message = "Selected compression method does not exists.";
         }
     }
 }
