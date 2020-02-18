@@ -163,15 +163,21 @@ public class MainWindow extends JFrame implements ActionListener {
             }
 
         } else if (target == this.saveBtn) {
+            for(var btn : this.compressBtns){
+                if (btn.isSelected()){
+                    this.algorithm = btn.getText();
+                }
+            }
+
             try {
                 byte[] data = Files.readAllBytes(this.selectedFile.toPath());
                 try {
-                    manager.setCompressAlogrithm("Jar");
+                    manager.setCompressAlogrithm(this.algorithm);
                     try {
                         manager.write(this.selectedFile.getPath(), data);
                     } catch (Exception e) {
                         e.printStackTrace();
-                        this.messageLabel.setText("Fail to write compressed file");
+                        this.messageLabel.setText("Failed to write compressed file");
                     }
                 } catch (Exception e) {
                     e.printStackTrace();
@@ -179,7 +185,7 @@ public class MainWindow extends JFrame implements ActionListener {
                 }
 
             } catch (Exception e) {
-
+                this.messageLabel.setText("Failed to read original file");
             }
         }
 
