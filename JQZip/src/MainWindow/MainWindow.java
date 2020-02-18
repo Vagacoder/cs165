@@ -47,8 +47,10 @@ import java.awt.event.*;
 import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
+import java.util.ArrayList;
 
 import javax.swing.*;
+import javax.swing.border.EmptyBorder;
 
 public class MainWindow extends JFrame implements ActionListener {
 
@@ -61,6 +63,7 @@ public class MainWindow extends JFrame implements ActionListener {
     private JFileChooser fileChooser;
     private CompressionManager manager;
     private String algorithm;
+    private ArrayList<JRadioButton> compressBtns;
 
     public MainWindow() {
 
@@ -74,21 +77,66 @@ public class MainWindow extends JFrame implements ActionListener {
         // main frame
         Container mainPane = this.getContentPane();
         mainPane.setLayout(new FlowLayout());
-        JPanel panel = new JPanel();
-        mainPane.add(panel);
+        JPanel rootPanel = new JPanel();
+        rootPanel.setLayout(new BoxLayout(rootPanel, BoxLayout.PAGE_AXIS));
+        rootPanel.setBorder(BorderFactory.createCompoundBorder(BorderFactory.createTitledBorder(""),
+            BorderFactory.createEmptyBorder(5, 5, 5, 5)));
+        rootPanel.setPreferredSize(new Dimension(580,360));
+        mainPane.add(rootPanel);
 
-        // buttons
+        // Panel of open file (top panel)
+        JPanel openFilePanel = new JPanel();
+        openFilePanel.setBorder(BorderFactory.createCompoundBorder(BorderFactory.createTitledBorder("Step 1: Choose a file"),
+            BorderFactory.createEmptyBorder(5, 5, 5, 5)));
+        rootPanel.add(openFilePanel);
         this.openBtn = new JButton("Open a File");
+        openBtn.addActionListener(this);
+        this.fileInfo.setBorder(new EmptyBorder(0, 10, 0, 0));
+        openFilePanel.add(openBtn);
+        openFilePanel.add(this.fileInfo);
+
+        // Panel of compression algorithm
+        JPanel algoPanel = new JPanel();
+        algoPanel.setBorder(BorderFactory.createCompoundBorder(BorderFactory.createTitledBorder("Step 2: Select a compression formart"),
+            BorderFactory.createEmptyBorder(5, 5, 5, 5)));
+        rootPanel.add(algoPanel);
+        
+        // set radio button of compression algorithms
+        this.compressBtns = new ArrayList<>();
+        ButtonGroup compressBtnGroup = new ButtonGroup();
+        File algoFolder = new File("src/Compressor");
+        File[] algoFiles = algoFolder.listFiles();
+
+        for (int i = 0; i < algoFiles.length; i++){
+            String algoName = algoFiles[i].getName().replace("Compressor.java", "");
+            if(!algoName.equals("I") && !algoName.equals("No")){
+                var btn = new JRadioButton(algoName);
+                this.compressBtns.add(btn);
+                compressBtnGroup.add(btn);
+                algoPanel.add(btn);
+                if(i == 0){
+                    btn.setSelected(true);
+                }
+            }
+        }
+
+        // Panel of save file
+        JPanel saveFilePanel = new JPanel();
+        saveFilePanel.setBorder(BorderFactory.createCompoundBorder(BorderFactory.createTitledBorder("Step 3: Save compressed file"),
+            BorderFactory.createEmptyBorder(5, 5, 5, 5)));
+        rootPanel.add(saveFilePanel);
         this.saveBtn = new JButton("Compress a File");
         this.saveBtn.setEnabled(false);
-        openBtn.addActionListener(this);
         saveBtn.addActionListener(this);
+        saveFilePanel.add(saveBtn);
 
-        panel.add(openBtn);
-        panel.add(this.fileInfo);
-        panel.add(saveBtn);
-        panel.add(new JLabel("System message:"));
-        panel.add(this.messageLabel);
+        // Panel of system log
+        JPanel systemInfoPanel = new JPanel();
+        systemInfoPanel.setBorder(BorderFactory.createCompoundBorder(BorderFactory.createTitledBorder("System Log"),
+            BorderFactory.createEmptyBorder(5, 5, 5, 5)));
+        rootPanel.add(systemInfoPanel);
+        systemInfoPanel.add(new JLabel("System message:"));
+        systemInfoPanel.add(this.messageLabel);
 
         this.setTitle("JQZip");
         this.setSize(600, 400);
