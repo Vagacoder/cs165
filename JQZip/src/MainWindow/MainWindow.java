@@ -48,6 +48,7 @@ import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.util.ArrayList;
+import java.util.Arrays;
 
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;
@@ -106,15 +107,18 @@ public class MainWindow extends JFrame implements ActionListener {
         ButtonGroup compressBtnGroup = new ButtonGroup();
         File algoFolder = new File("src/Compressor");
         File[] algoFiles = algoFolder.listFiles();
+        Arrays.sort(algoFiles);
 
         for (int i = 0; i < algoFiles.length; i++){
             String algoName = algoFiles[i].getName().replace("Compressor.java", "");
+            System.out.println(algoName);
+
             if(!algoName.equals("I") && !algoName.equals("No")){
                 var btn = new JRadioButton(algoName);
                 this.compressBtns.add(btn);
                 compressBtnGroup.add(btn);
                 algoPanel.add(btn);
-                if(i == 0){
+                if(this.compressBtns.size() == 1){
                     btn.setSelected(true);
                 }
             }
@@ -135,7 +139,6 @@ public class MainWindow extends JFrame implements ActionListener {
         systemInfoPanel.setBorder(BorderFactory.createCompoundBorder(BorderFactory.createTitledBorder("System Log"),
             BorderFactory.createEmptyBorder(5, 5, 5, 5)));
         rootPanel.add(systemInfoPanel);
-        systemInfoPanel.add(new JLabel("System message:"));
         systemInfoPanel.add(this.messageLabel);
 
         this.setTitle("JQZip");
@@ -175,6 +178,16 @@ public class MainWindow extends JFrame implements ActionListener {
                     manager.setCompressAlogrithm(this.algorithm);
                     try {
                         manager.write(this.selectedFile.getPath(), data);
+                        String fileExtension;
+                        if(this.algorithm.equals("GZip")){
+                            fileExtension = ".gz";
+                        } else if (this.algorithm.equals("Bzip2")){
+                            fileExtension = ".bz2";
+                        } else {
+                            fileExtension = "." + algorithm.toLowerCase();
+                        }
+                        this.messageLabel.setText(this.selectedFile.getName() +  
+                            fileExtension + " is succeessfully saved");
                     } catch (Exception e) {
                         e.printStackTrace();
                         this.messageLabel.setText("Failed to write compressed file");
