@@ -118,3 +118,5 @@ A primary stage is created by the **JavaFX runtime**, and passed into the Applic
 
 4. To start an Application (a class implements Application), call static method: `Appliaction.launch(arg)`;
 
+### 7. 2020/02/15 
+Project: JQZip Single File Compressor
