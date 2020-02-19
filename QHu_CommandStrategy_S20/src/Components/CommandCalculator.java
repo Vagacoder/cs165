@@ -1,4 +1,34 @@
-package Template;
+package Components;
+
+/*
+* CS165 Assignment: Command and Strategy, Calculator
+
+* SRS:
+1. Must support at least +, -, *, /.
+2. Commands that have been executed can be undone, with unlimited levels of undo.
+3. The log maintains a list of commands that have been executed.
+4. Must use the Command design pattern to support undo-ing and logging of operations.
+5. Must be able to write the log to a file in the following formats: plain text 
+    or XML (you choose the element names).
+6. Must use the Strategy design pattern to encapsulate each log-file-saving algorithm 
+    in separate classes that implement a common interface.
+
+STARTER PROJECT:  
+You are welcome to use the Swing-based CalculatorStarter project.  
+It's got buttons and menu items with predefined event handlers.  
+But note that this is just an option - you can use any framework or language you 
+like as long as it meets the requirements described above.
+
+* Task
+1. UML ... done
+2. Project skeleton ... 
+3. GUI
+4. Basic arithmetic command
+5. Test
+6. Extension of commands
+
+*/
+
 
 import static sbcc.Core.*;
 
@@ -47,13 +77,13 @@ public class CommandCalculator extends JFrame {
 
 
 	public CommandCalculator() {
-		panel = new JPanel();
+		this.panel = new JPanel();
 		panel.setBackground(new Color(255, 255, 255));
 		panel.setFont(new Font("Arial", Font.PLAIN, 18));
 		getContentPane().add(panel, BorderLayout.CENTER);
 		panel.setLayout(null);
 
-		oneButton = new JButton("1");
+		this.oneButton = new JButton("1");
 		oneButton.setBorderPainted(false);
 		oneButton.setOpaque(true);
 		oneButton.setFocusable(false);
@@ -72,7 +102,7 @@ public class CommandCalculator extends JFrame {
 		oneButton.setBounds(10, 432, 96, 96);
 		panel.add(oneButton);
 
-		resultLabel = new JLabel("0");
+		this.resultLabel = new JLabel("0");
 		resultLabel.setBorder(new EmptyBorder(3, 8, 0, 40));
 		resultLabel.setBackground(new Color(51, 51, 51));
 		resultLabel.setOpaque(true);
@@ -99,7 +129,7 @@ public class CommandCalculator extends JFrame {
 		twoButton.setBounds(118, 432, 96, 96);
 		panel.add(twoButton);
 
-		plusButton = new JButton("+");
+		this.plusButton = new JButton("+");
 		plusButton.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
@@ -116,7 +146,7 @@ public class CommandCalculator extends JFrame {
 		plusButton.setBounds(334, 432, 96, 96);
 		panel.add(plusButton);
 
-		threeButton = new JButton("3");
+		this.threeButton = new JButton("3");
 		threeButton.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
@@ -133,7 +163,7 @@ public class CommandCalculator extends JFrame {
 		threeButton.setBounds(226, 432, 96, 96);
 		panel.add(threeButton);
 
-		zeroButton = new JButton(" 0");
+		this.zeroButton = new JButton(" 0");
 		zeroButton.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
@@ -151,7 +181,7 @@ public class CommandCalculator extends JFrame {
 		zeroButton.setBounds(16, 540, 198, 96);
 		panel.add(zeroButton);
 
-		multiplyButton = new JButton("x");
+		this.multiplyButton = new JButton("x");
 		multiplyButton.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
@@ -304,7 +334,7 @@ public class CommandCalculator extends JFrame {
 		nineButton.setBounds(226, 216, 96, 96);
 		panel.add(nineButton);
 
-		divideButton = new JButton("�");
+		divideButton = new JButton("\u00f7");
 		divideButton.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
@@ -355,7 +385,7 @@ public class CommandCalculator extends JFrame {
 		btnUndo.setBounds(118, 108, 96, 96);
 		panel.add(btnUndo);
 
-		plusMinusButton = new JButton("�");
+		plusMinusButton = new JButton("\u00b1");
 		plusMinusButton.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
@@ -516,12 +546,12 @@ public class CommandCalculator extends JFrame {
 
 
 	protected void do_plusMinusButton_actionPerformed(ActionEvent e) {
-		println("� clicked");
+		println("\u00b1 clicked");
 	}
 
 
 	protected void do_divideButton_actionPerformed(ActionEvent e) {
-		println("� clicked");
+		println("\u00f7 clicked");
 	}
 
 
