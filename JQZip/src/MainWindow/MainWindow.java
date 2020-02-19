@@ -111,8 +111,6 @@ public class MainWindow extends JFrame implements ActionListener {
 
         for (int i = 0; i < algoFiles.length; i++){
             String algoName = algoFiles[i].getName().replace("Compressor.java", "");
-            System.out.println(algoName);
-
             if(!algoName.equals("I") && !algoName.equals("No")){
                 var btn = new JRadioButton(algoName);
                 this.compressBtns.add(btn);
