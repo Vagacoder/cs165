@@ -49,6 +49,8 @@ public class CommandCalculator extends JFrame {
 	private JPanel panel;
 	private JButton oneButton;
 	private JLabel resultLabel;
+	private DisplayPanel display;
+
 	private JButton clearButton;
 	private JButton btnUndo;
 	private JButton plusMinusButton;
@@ -102,15 +104,19 @@ public class CommandCalculator extends JFrame {
 		oneButton.setBounds(10, 432, 96, 96);
 		panel.add(oneButton);
 
-		this.resultLabel = new JLabel("0");
-		resultLabel.setBorder(new EmptyBorder(3, 8, 0, 40));
-		resultLabel.setBackground(new Color(51, 51, 51));
-		resultLabel.setOpaque(true);
-		resultLabel.setHorizontalAlignment(SwingConstants.RIGHT);
-		resultLabel.setForeground(new Color(255, 255, 255));
-		resultLabel.setFont(new Font("Arial", Font.PLAIN, 72));
-		resultLabel.setBounds(0, 0, 443, 96);
-		panel.add(resultLabel);
+		// * Display Panel
+		// this.resultLabel = new JLabel("0");
+		// resultLabel.setBorder(new EmptyBorder(3, 8, 0, 40));
+		// resultLabel.setBackground(new Color(51, 51, 51));
+		// resultLabel.setOpaque(true);
+		// resultLabel.setHorizontalAlignment(SwingConstants.RIGHT);
+		// resultLabel.setForeground(new Color(255, 255, 255));
+		// resultLabel.setFont(new Font("Arial", Font.PLAIN, 72));
+		// resultLabel.setBounds(0, 0, 443, 96);
+		// panel.add(resultLabel);
+		this.display = new DisplayPanel();
+		this.display.setBounds(0, 0, 443, 96);
+		panel.add(display);
 
 		twoButton = new JButton("2");
 		twoButton.addActionListener(new ActionListener() {
