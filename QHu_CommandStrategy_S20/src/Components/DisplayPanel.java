@@ -18,9 +18,9 @@ public class DisplayPanel extends JPanel{
 		resultLabel.setHorizontalAlignment(SwingConstants.RIGHT);
 		resultLabel.setForeground(new Color(255, 255, 255));
 		resultLabel.setFont(new Font("Arial", Font.PLAIN, 72));
-        resultLabel.setBounds(0, 0, 443, 96);
+        resultLabel.setBounds(0, 0, 450, 96);
         this.setLayout(null);
-        this.setSize(443, 96);
+        this.setSize(450, 96);
         this.add(resultLabel);
     }
 
