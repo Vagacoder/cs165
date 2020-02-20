@@ -17,14 +17,14 @@ public class DisplayPanel extends JPanel{
 		resultLabel.setOpaque(true);
 		resultLabel.setHorizontalAlignment(SwingConstants.RIGHT);
 		resultLabel.setForeground(new Color(255, 255, 255));
-		resultLabel.setFont(new Font("Arial", Font.PLAIN, 72));
+		resultLabel.setFont(new Font("Arial", Font.PLAIN, 64));
         resultLabel.setBounds(0, 0, 450, 96);
         this.setLayout(null);
         this.setSize(450, 96);
         this.add(resultLabel);
     }
 
-    public void UpdateResultLabel(String content){
+    public void updateResultLabel(String content){
         this.resultLabel.setText(content);
     }
 

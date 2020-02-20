@@ -75,7 +75,7 @@ public class CommandCalculator extends JFrame {
 		panel.add(display);
 
 		// * Button Panel
-		this.buttonPanel = new ButtonPanel();
+		this.buttonPanel = new ButtonPanel(this.display);
 		this.buttonPanel.setBounds(0, 100, 450, 800);
 		panel.add(buttonPanel);
 
