@@ -75,7 +75,7 @@ public class Processor {
     this.operand2 = "";
     this.operator = "";
     this.commands.push(command);
-    this.logManger.addLog(convertCommandToLog(command));
+    this.logManger.addLog(command);
     System.out.println(convertCommandToLog(command));
   }
 

@@ -5,13 +5,15 @@ import java.io.FileOutputStream;
 import java.io.OutputStream;
 import java.util.List;
 
+import Commands.ICommand;
+
 public class TextLog implements ILog {
 
     @Override
-    public void write(List<String> logs) {
+    public void write(List<ICommand> logs) {
         String textLog = "";
-        for (String log : logs) {
-            textLog += (log + "\n");
+        for (ICommand log : logs) {
+            textLog += (log.getOperand1() + "\n");
             System.out.println(log);
             System.out.println(textLog);
         }

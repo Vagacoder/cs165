@@ -21,10 +21,10 @@ like as long as it meets the requirements described above.
 
 * Task
 1. UML ... done
-2. Project skeleton ... 
-3. GUI
-4. Basic arithmetic command
-5. Test
+2. Project skeleton ... done
+3. GUI ... done may need improvement
+4. Basic arithmetic command ... 90% is done, log format need some working
+5. Test ... 
 6. Extension of commands
 
 */
@@ -37,10 +37,10 @@ import java.awt.event.*;
 
 import javax.swing.*;
 
-import static java.lang.System.*;
-import static org.apache.commons.lang3.StringUtils.*;
-import javax.swing.border.LineBorder;
-import javax.swing.border.EmptyBorder;
+// import static java.lang.System.*;
+// import static org.apache.commons.lang3.StringUtils.*;
+// import javax.swing.border.LineBorder;
+// import javax.swing.border.EmptyBorder;
 
 public class CommandCalculator extends JFrame {
 

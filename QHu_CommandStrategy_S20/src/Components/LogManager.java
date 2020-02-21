@@ -1,17 +1,19 @@
 package Components;
 
 import java.util.ArrayList;
+
+import Commands.ICommand;
 import Logs.ILog;
 
 public class LogManager {
 
-    private ArrayList<String> logs;
+    private ArrayList<ICommand> logs;
 
     public LogManager(){
         this.logs = new ArrayList<>();
     }
 
-    public void addLog(String log){
+    public void addLog(ICommand log){
         this.logs.add(log);
     }
 

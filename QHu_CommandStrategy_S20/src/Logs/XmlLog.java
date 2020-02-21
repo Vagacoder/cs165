@@ -5,16 +5,18 @@ import java.io.FileOutputStream;
 import java.io.OutputStream;
 import java.util.List;
 
+import Commands.ICommand;
+
 public class XmlLog implements ILog {
 
     @Override
-    public void write(List<String> logs) {
+    public void write(List<ICommand> logs) {
         String xmlLog = "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n";
         xmlLog += "<logs>\n";
 
-        for (String log : logs) {
+        for (ICommand log : logs) {
             xmlLog += "<command>";
-            xmlLog += (log);
+            xmlLog += (log.getOperand1());
             xmlLog += "</command>\n";
         }
 
