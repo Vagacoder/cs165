@@ -5,22 +5,26 @@ import java.io.FileOutputStream;
 import java.io.OutputStream;
 import java.util.List;
 
-public class TextLog implements ILog {
+public class XmlLog implements ILog {
 
     @Override
     public void write(List<String> logs) {
-        String textLog = "";
+        String xmlLog = "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n";
+        xmlLog += "<logs>\n";
+
         for (String log : logs) {
-            textLog += (log + "\n");
-            System.out.println(log);
-            System.out.println(textLog);
+            xmlLog += "<command>";
+            xmlLog += (log);
+            xmlLog += "</command>\n";
         }
 
-        File outFile = new File("log.txt");
+        xmlLog += "</logs>\n";
+
+        File outFile = new File("log.xml");
         OutputStream out;
         try {
             out = new FileOutputStream(outFile);
-            byte[] data = textLog.getBytes();
+            byte[] data = xmlLog.getBytes();
             out.write(data);
             out.close();
         } catch (Exception e) {

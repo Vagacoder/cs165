@@ -37,9 +37,9 @@ public class ButtonPanel extends JPanel {
   private JButton equalsButton;
   private JButton periodButton;
 
-  public ButtonPanel(DisplayPanel displayPanel) {
+  public ButtonPanel(DisplayPanel displayPanel, LogManager logManager) {
 
-    this.processor = new Processor(displayPanel);
+    this.processor = new Processor(displayPanel, logManager);
 
     // * main panel for all buttons
     this.setLayout(null);
@@ -404,47 +404,47 @@ public class ButtonPanel extends JPanel {
 
   protected void do_zeroButton_actionPerformed(ActionEvent e) {
     println("0 clicked");
-    // this.processor.executeCommand(new DigitCommand("0", this.processor));
+    this.processor.takeOperand("0");
   }
 
   protected void do_twoButton_actionPerformed(ActionEvent e) {
     println("2 clicked");
-    // this.processor.executeCommand(new DigitCommand("2", this.processor));
+    this.processor.takeOperand("2");
   }
 
   protected void do_threeButton_actionPerformed(ActionEvent e) {
     println("3 clicked");
-    // this.processor.executeCommand(new DigitCommand("3", this.processor));
+    this.processor.takeOperand("3");
   }
 
   protected void do_fourButton_actionPerformed(ActionEvent e) {
     println("4 clicked");
-    // this.processor.executeCommand(new DigitCommand("4", this.processor));
+    this.processor.takeOperand("4");
   }
 
   protected void do_fiveButton_actionPerformed(ActionEvent e) {
     println("5 clicked");
-    // this.processor.executeCommand(new DigitCommand("5", this.processor));
+    this.processor.takeOperand("5");
   }
 
   protected void do_sixButton_actionPerformed(ActionEvent e) {
     println("6 clicked");
-    // this.processor.executeCommand(new DigitCommand("6", this.processor));
+    this.processor.takeOperand("6");
   }
 
   protected void do_sevenButton_actionPerformed(ActionEvent e) {
     println("7 clicked");
-    // this.processor.executeCommand(new DigitCommand("7", this.processor));
+    this.processor.takeOperand("7");
   }
 
   protected void do_eightButton_actionPerformed(ActionEvent e) {
     println("8 clicked");
-    // this.processor.executeCommand(new DigitCommand("8", this.processor));
+    this.processor.takeOperand("8");
   }
 
   protected void do_nineButton_actionPerformed(ActionEvent e) {
     println("9 clicked");
-    // this.processor.executeCommand(new DigitCommand("9", this.processor));
+    this.processor.takeOperand("9");
   }
 
   protected void do_clearButton_actionPerformed(ActionEvent e) {
@@ -454,6 +454,7 @@ public class ButtonPanel extends JPanel {
 
   protected void do_btnUndo_actionPerformed(ActionEvent e) {
     println("undo clicked");
+    this.processor.undo();
   }
 
   protected void do_plusMinusButton_actionPerformed(ActionEvent e) {
@@ -462,30 +463,32 @@ public class ButtonPanel extends JPanel {
 
   protected void do_divideButton_actionPerformed(ActionEvent e) {
     println("\u00f7 clicked");
+    this.processor.takeOperator("\u00f7");
   }
 
   protected void do_multiplyButton_actionPerformed(ActionEvent e) {
     println("x clicked");
+    this.processor.takeOperator("x");
   }
 
   protected void do_subtractButton_actionPerformed(ActionEvent e) {
     println("- clicked");
+    this.processor.takeOperator("-");
   }
 
   protected void do_plusButton_actionPerformed(ActionEvent e) {
     println("+ clicked");
     this.processor.takeOperator("+");
-
   }
 
   protected void do_equalsButton_actionPerformed(ActionEvent e) {
     println("= clicked");
-    this.processor.executeCommand();
+    this.processor.executeEquation();
   }
 
   protected void do_periodButton_actionPerformed(ActionEvent e) {
     println(". clicked");
-    // this.processor.executeCommand(new DigitCommand(".", this.processor));
+    this.processor.takeOperand(".");
   }
 
 }

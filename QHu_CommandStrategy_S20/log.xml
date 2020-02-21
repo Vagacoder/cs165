@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<logs>
+<command>1+2</command>
+<command>3.0+3</command>
+<command>6.0+4</command>
+<command>10.0+5</command>
+<command>undo</command>
+<command>6.0+4</command>
+<command>undo</command>
+<command>3.0+3</command>
+<command>undo</command>
+<command>1+2</command>
+<command>undo</command>
+</logs>

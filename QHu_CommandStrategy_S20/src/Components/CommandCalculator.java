@@ -50,6 +50,7 @@ public class CommandCalculator extends JFrame {
 
 	private DisplayPanel display;
 	private ButtonPanel buttonPanel;
+	private LogManager logManager;
 
 	private JMenuItem quitMenuItem;
 	private JSeparator separator;
@@ -68,6 +69,8 @@ public class CommandCalculator extends JFrame {
 		getContentPane().add(panel, BorderLayout.CENTER);
 		panel.setLayout(null);
 
+		// * Log Manager
+		this.logManager = new LogManager();
 
 		// * Display Panel
 		this.display = new DisplayPanel();
@@ -75,7 +78,7 @@ public class CommandCalculator extends JFrame {
 		panel.add(display);
 
 		// * Button Panel
-		this.buttonPanel = new ButtonPanel(this.display);
+		this.buttonPanel = new ButtonPanel(this.display, this.logManager);
 		this.buttonPanel.setBounds(0, 100, 450, 800);
 		panel.add(buttonPanel);
 
@@ -133,11 +136,13 @@ public class CommandCalculator extends JFrame {
 
 	protected void do_saveAsXmlMenuItem_actionPerformed(ActionEvent e) {
 		println("Save as XML");
+		this.logManager.saveLog("Xml");
 	}
 
 
 	protected void do_saveAsTextMenuItem_actionPerformed(ActionEvent e) {
 		println("Save as text");
+		this.logManager.saveLog("Text");
 	}
 
 

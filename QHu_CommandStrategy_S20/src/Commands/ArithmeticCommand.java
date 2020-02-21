@@ -4,7 +4,6 @@ import Components.DisplayPanel;
 
 public class ArithmeticCommand implements ICommand {
 
-    // private Processor processor;
     protected String operand1;
     protected String operator;
     protected String operand2;
@@ -27,7 +26,7 @@ public class ArithmeticCommand implements ICommand {
             result = (o1 + o2) + "";
         } else if(operator.equals("-")){
             result = (o1 - o2) + "";
-        } else if(operator.equals("*")){
+        } else if(operator.equals("x")){
             result = (o1 * o2) + "";
         } else if(operator.equals("\u00f7")){
             result = (o1 / o2) + "";

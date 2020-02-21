@@ -6,18 +6,22 @@ import Logs.ILog;
 public class LogManager {
 
     private ArrayList<String> logs;
-    private String logType;
 
     public LogManager(){
         this.logs = new ArrayList<>();
-        this.logType = "text";
     }
 
     public void addLog(String log){
         this.logs.add(log);
     }
 
-    public void saveLog(){
-
+    public void saveLog(String type){
+        try{
+        Class logClass = Class.forName("Logs." + type + "Log");
+        ILog logger = (ILog) logClass.getDeclaredConstructor().newInstance();
+        logger.write(this.logs);
+        } catch(Exception ex){
+            ex.printStackTrace();
+        }
     }
 }
