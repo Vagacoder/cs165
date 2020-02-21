@@ -13,7 +13,11 @@ public class TextLog implements ILog {
     public void write(List<ICommand> logs) {
         String textLog = "";
         for (ICommand log : logs) {
-            textLog += (log.getOperand1() + "\n");
+            String thisLog = String.format("operator: %s, operand1: %s, operand2: %s", 
+                log.getOperator(), 
+                log.getOperand1(), 
+                log.getOperand2());
+            textLog += (thisLog + "\n");
             System.out.println(log);
             System.out.println(textLog);
         }

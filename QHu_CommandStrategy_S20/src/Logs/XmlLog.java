@@ -15,8 +15,16 @@ public class XmlLog implements ILog {
         xmlLog += "<logs>\n";
 
         for (ICommand log : logs) {
-            xmlLog += "<command>";
+            xmlLog += "<command>\n";
+            xmlLog += "<operator>";
+            xmlLog += (log.getOperator());
+            xmlLog += "</operator>\n";
+            xmlLog += "<operand1>";
             xmlLog += (log.getOperand1());
+            xmlLog += "</operand1>\n";
+            xmlLog += "<operand2>";
+            xmlLog += (log.getOperand2());
+            xmlLog += "</operand2>\n";
             xmlLog += "</command>\n";
         }
 

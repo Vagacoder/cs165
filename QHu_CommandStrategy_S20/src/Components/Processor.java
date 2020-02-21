@@ -4,6 +4,7 @@ import java.util.Stack;
 
 import Commands.ArithmeticCommand;
 import Commands.ICommand;
+import Commands.UndoCommand;
 
 public class Processor {
 
@@ -57,7 +58,7 @@ public class Processor {
   public void undo() {
     if (!commands.isEmpty()) {
       commands.pop();
-      this.logManger.addLog("undo");
+      this.logManger.addLog(new UndoCommand());
       if (!commands.isEmpty()) {
         executeCommand(commands.pop());
       } else {
