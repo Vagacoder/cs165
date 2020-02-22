@@ -23,7 +23,7 @@ like as long as it meets the requirements described above.
 1. UML ... done
 2. Project skeleton ... done
 3. GUI ... done may need improvement
-4. Basic arithmetic command ... 90% is done, log format need some working
+4. Basic arithmetic command ... done
 5. Test ... 
 6. Extension of commands
 

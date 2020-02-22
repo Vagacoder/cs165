@@ -13,6 +13,7 @@ public class ButtonPanel extends JPanel {
   private Processor processor;
   private JPanel basicPanel;
   private JPanel advancePanel;
+  private AdvancedButtonPanel advBtnPanel;
 
   private JButton clearButton;
   private JButton btnUndo;
@@ -55,6 +56,11 @@ public class ButtonPanel extends JPanel {
     ;
     this.add(this.advancePanel);
 
+    // *** advanced button panel
+    this.advBtnPanel = new AdvancedButtonPanel(this.processor);
+    advBtnPanel.setBounds(10, 17, 430, 125);
+    this.advancePanel.add(this.advBtnPanel);
+
     // ** bottom panel for basic function buttons
     this.basicPanel = new JPanel();
     basicPanel.setLayout(null);
@@ -65,7 +71,7 @@ public class ButtonPanel extends JPanel {
         BorderFactory.createEmptyBorder(5, 5, 5, 5)));
     this.add(this.basicPanel);
 
-    // ** Buttons
+    // *** Basic function buttons
     clearButton = new JButton("ac");
     clearButton.addActionListener(new ActionListener() {
       @Override
@@ -456,6 +462,7 @@ public class ButtonPanel extends JPanel {
 
   protected void do_plusMinusButton_actionPerformed(ActionEvent e) {
     println("\u00b1 clicked");
+    this.processor.changeOperandSign();
   }
 
   protected void do_divideButton_actionPerformed(ActionEvent e) {

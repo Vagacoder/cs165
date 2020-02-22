@@ -48,6 +48,27 @@ public class Processor {
     updateDisplay();
   }
 
+  public void changeOperandSign(){
+    if (this.operator.equals("")) {
+      if(!this.operand1.equals("0")){
+        if(this.operand1.startsWith("-")){
+          this.operand1 = this.operand1.substring(1);
+        }else {
+        this.operand1 = "-" + operand1;
+        }
+      }
+    }else {
+      if(!this.operand2.equals("0") && !this.operand2.equals("")){
+        if(this.operand2.startsWith("-")){
+          this.operand2 = this.operand2.substring(1);
+        }else {
+        this.operand2 = "-" + operand2;
+        }
+      }
+    }
+    updateDisplay();
+  }
+
   public void clearAll() {
     this.operand1 = "0";
     this.operand2 = "";
@@ -64,6 +85,8 @@ public class Processor {
       } else {
         clearAll();
       }
+    }else {
+      clearAll();
     }
   }
 
@@ -71,13 +94,38 @@ public class Processor {
     executeCommand(new ArithmeticCommand(this.operand1, this.operator, this.operand2, this.display));
   }
 
-  public void executeCommand(ICommand command) {
+  private void executeCommand(ICommand command) {
     this.operand1 = command.execute();
     this.operand2 = "";
     this.operator = "";
     this.commands.push(command);
     this.logManger.addLog(command);
     System.out.println(convertCommandToLog(command));
+  }
+
+  public void executeAdvOneOperandCommand(String advComName){
+
+    if (!this.operand2.equals("") || !this.operator.equals("")){
+      return;
+    }
+    
+    this.operator = advComName;
+    
+    try{
+    Class advComClass = Class.forName("Commands.AdvancedCommands." + advComName + "Command");
+    Class[] args = new Class[4];
+    args[0] = String.class;
+    args[1] = String.class;
+    args[2] = String.class;
+    args[3] = DisplayPanel.class;
+
+    ICommand advCom = (ICommand) advComClass.getDeclaredConstructor(args).newInstance(
+      this.operand1, this.operator, this.operand2, this.display
+      );
+    executeCommand(advCom);
+    } catch(Exception ex){
+      ex.printStackTrace();
+    }
   }
 
   private String convertCommandToLog(ICommand command) {
