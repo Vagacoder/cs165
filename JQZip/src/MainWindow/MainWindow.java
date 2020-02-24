@@ -71,7 +71,7 @@ public class MainWindow extends JFrame implements ActionListener {
         this.selectedFile = null;
         this.fileInfo = new JLabel("No file selected");
         this.messageLabel = new JLabel("Please select a file");
-        this.fileChooser = new JFileChooser();
+        this.fileChooser = new JFileChooser("./");
         this.manager = new CompressionManager();
         this.algorithm = "";
 

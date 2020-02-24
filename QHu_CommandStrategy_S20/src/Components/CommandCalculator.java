@@ -24,8 +24,8 @@ like as long as it meets the requirements described above.
 2. Project skeleton ... done
 3. GUI ... done may need improvement
 4. Basic arithmetic command ... done
-5. Test ... 
-6. Extension of commands
+5. Test ... done
+6. Extension of commands ... done
 
 */
 
@@ -82,7 +82,7 @@ public class CommandCalculator extends JFrame {
 		this.buttonPanel.setBounds(0, 100, 450, 800);
 		panel.add(buttonPanel);
 
-
+		// * Menu bar
 		JMenuBar menuBar = new JMenuBar();
 		menuBar.setFont(new Font("Arial", Font.BOLD, 18));
 		getContentPane().add(menuBar, BorderLayout.NORTH);

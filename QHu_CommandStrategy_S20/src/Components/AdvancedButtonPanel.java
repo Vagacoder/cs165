@@ -47,6 +47,7 @@ public class AdvancedButtonPanel extends JPanel {
 
   }
 
+  // helper, change some commands' names to symbols, which are displayed on buttons 
   private String getBtnName(String comName){
     String result = comName;
 
@@ -57,7 +58,6 @@ public class AdvancedButtonPanel extends JPanel {
     } else if( comName.equals("Sqrt")){
       return "\u221Ax";
     }
-
     return result;
   }
 
