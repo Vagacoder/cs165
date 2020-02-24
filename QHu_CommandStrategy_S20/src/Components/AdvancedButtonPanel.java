@@ -27,7 +27,7 @@ public class AdvancedButtonPanel extends JPanel {
   }
 
   private void addAdvButtons() {
-    File advComFolder = new File("src/Commands/AdvancedCommands");
+    File advComFolder = new File("src/Commands/AdvancedCommands/OneOperand");
     File[] advComFiles = advComFolder.listFiles();
     Arrays.sort(advComFiles);
 

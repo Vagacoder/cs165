@@ -120,19 +120,20 @@ public class Processor {
     }
 
     this.operator = advComName;
+    
+    try{
+    Class advComClass = Class.forName("Commands.AdvancedCommands.OneOperand." + advComName + "Command");
+    Class[] args = new Class[4];
+    args[0] = String.class;
+    args[1] = String.class;
+    args[2] = String.class;
+    args[3] = DisplayPanel.class;
 
-    try {
-      Class advComClass = Class.forName("Commands.AdvancedCommands." + advComName + "Command");
-      Class[] args = new Class[4];
-      args[0] = String.class;
-      args[1] = String.class;
-      args[2] = String.class;
-      args[3] = DisplayPanel.class;
-
-      ICommand advCom = (ICommand) advComClass.getDeclaredConstructor(args).newInstance(this.operand1, this.operator,
-          this.operand2, this.display);
-      executeCommand(advCom);
-    } catch (Exception ex) {
+    ICommand advCom = (ICommand) advComClass.getDeclaredConstructor(args).newInstance(
+      this.operand1, this.operator, this.operand2, this.display
+      );
+    executeCommand(advCom);
+    } catch(Exception ex){
       ex.printStackTrace();
     }
   }

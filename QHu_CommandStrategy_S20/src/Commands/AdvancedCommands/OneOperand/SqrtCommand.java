@@ -1,30 +1,28 @@
-package Commands.AdvancedCommands;
+package Commands.AdvancedCommands.OneOperand;
 
 import Commands.ICommand;
 import Components.DisplayPanel;
 
-public class ReciprocalCommand implements ICommand {
+public class SqrtCommand implements ICommand {
 
     protected String operand1;
     protected String operator;
     protected String operand2;
     private DisplayPanel display;
 
-    public ReciprocalCommand(String operand1, String operator, String operand2, DisplayPanel display) {
+    public SqrtCommand(String operand1, String operator, String operand2, 
+    DisplayPanel display){
         this.operand1 = operand1;
         this.operator = operator;
         this.operand2 = operand2;
-        this.display = display;
+        this.display= display;
     }
 
     @Override
     public String execute() {
         String result = "";
         double o1 = Double.parseDouble(operand1);
-        result = 1.0 / o1 + "";
-        if (result.length() > 8) {
-            result = String.format("%.4f", 1.0 / o1);
-        }
+        result = String.format("%.6f", Math.sqrt(o1));
         this.display.updateResultLabel(result);
         return result;
     }
@@ -43,5 +41,4 @@ public class ReciprocalCommand implements ICommand {
     public String getOperator() {
         return this.operator;
     }
-
 }

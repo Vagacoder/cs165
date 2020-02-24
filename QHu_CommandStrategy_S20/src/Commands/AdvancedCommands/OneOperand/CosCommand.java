@@ -1,16 +1,16 @@
-package Commands.AdvancedCommands;
+package Commands.AdvancedCommands.OneOperand;
 
 import Commands.ICommand;
 import Components.DisplayPanel;
 
-public class SquareCommand implements ICommand {
+public class CosCommand implements ICommand {
 
     protected String operand1;
     protected String operator;
     protected String operand2;
     private DisplayPanel display;
 
-    public SquareCommand(String operand1, String operator, String operand2, 
+    public CosCommand(String operand1, String operator, String operand2, 
     DisplayPanel display){
         this.operand1 = operand1;
         this.operator = operator;
@@ -22,7 +22,7 @@ public class SquareCommand implements ICommand {
     public String execute() {
         String result = "";
         double o1 = Double.parseDouble(operand1);
-        result = (o1 * o1) + "";
+        result = String.format("%.6f", Math.cos(o1));
         this.display.updateResultLabel(result);
         return result;
     }

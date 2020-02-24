@@ -1,4 +1,4 @@
-package Commands.AdvancedCommands;
+package Commands.AdvancedCommands.OneOperand;
 
 import Commands.ICommand;
 import Components.DisplayPanel;
