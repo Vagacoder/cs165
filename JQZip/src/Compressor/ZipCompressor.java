@@ -1,6 +1,6 @@
 package Compressor;
 
-import java.io.BufferedOutputStream;
+// import java.io.BufferedOutputStream;
 import java.io.File;
 import org.apache.commons.compress.archivers.ArchiveOutputStream;
 import org.apache.commons.compress.archivers.zip.ZipArchiveEntry;
@@ -14,9 +14,9 @@ public class ZipCompressor implements ICompressor {
                 new File(filename+".zip"));
             ZipArchiveEntry entry = new ZipArchiveEntry(filename);
             out.putArchiveEntry(entry);
-            BufferedOutputStream bufferedOut = new BufferedOutputStream(out);
-            bufferedOut.write(data);
+            // BufferedOutputStream bufferedOut = new BufferedOutputStream(out);
+            out.write(data);
             out.closeArchiveEntry();
-            bufferedOut.close();
+            out.close();
     }
 }
