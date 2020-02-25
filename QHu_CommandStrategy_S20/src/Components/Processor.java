@@ -99,7 +99,9 @@ public class Processor {
   }
 
   public void executeEquation() {
+    if(!this.operand1.equals("") && !this.operator.equals("") && !this.operand2.equals("")){
     executeCommand(new ArithmeticCommand(this.operand1, this.operator, this.operand2, this.display));
+    }
   }
 
   private void executeCommand(ICommand command) {

@@ -37,6 +37,15 @@ public class AdvancedButtonPanel extends JPanel {
         String advComName = currentFile.getName().replace("Command.java", "");
         String advBtnName = getBtnName(advComName);
         var btn = new JButton(advBtnName);
+
+        // * testing pattern of button
+        btn.setFont(new Font("Arial", Font.PLAIN, 16));
+        btn.setBackground(new Color(0xb37400));
+        btn.setForeground(Color.WHITE);
+        btn.setSize(96, 40);
+        btn.setFocusable(false);
+
+
         btn.addActionListener((ActionEvent e)->{
           do_advOneOperandBtn_actionPerformed(advComName);
         });
