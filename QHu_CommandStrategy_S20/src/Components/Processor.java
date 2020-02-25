@@ -37,6 +37,8 @@ public class Processor {
       }
     } else {
       if (this.operand2.equals("") && newOperand.equals(".")) {
+      } else if (this.operand2.equals("0") && !newOperand.equals(".")) {
+        this.operand2 = newOperand;
       } else {
         if (newOperand.equals(".") && (this.operand2.contains("."))) {
         } else {
