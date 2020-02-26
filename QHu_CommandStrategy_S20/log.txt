@@ -1,0 +1,8 @@
+operator: +, operand1: 0.2, operand2: -6
+operator: x, operand1: -5.8, operand2: 9
+operator: Cos, operand1: -52.199999999999996, operand2: 
+operator: undo, operand1: , operand2: 
+operator: x, operand1: -5.8, operand2: 9
+operator: undo, operand1: , operand2: 
+operator: +, operand1: 0.2, operand2: -6
+operator: undo, operand1: , operand2: 

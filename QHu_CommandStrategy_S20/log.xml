@@ -1,3 +1,43 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <logs>
+<command>
+	<operator>+</operator>
+	<operand1>0.2</operand1>
+	<operand2>-6</operand2>
+</command>
+<command>
+	<operator>x</operator>
+	<operand1>-5.8</operand1>
+	<operand2>9</operand2>
+</command>
+<command>
+	<operator>Cos</operator>
+	<operand1>-52.199999999999996</operand1>
+	<operand2></operand2>
+</command>
+<command>
+	<operator>undo</operator>
+	<operand1></operand1>
+	<operand2></operand2>
+</command>
+<command>
+	<operator>x</operator>
+	<operand1>-5.8</operand1>
+	<operand2>9</operand2>
+</command>
+<command>
+	<operator>undo</operator>
+	<operand1></operand1>
+	<operand2></operand2>
+</command>
+<command>
+	<operator>+</operator>
+	<operand1>0.2</operand1>
+	<operand2>-6</operand2>
+</command>
+<command>
+	<operator>undo</operator>
+	<operand1></operand1>
+	<operand2></operand2>
+</command>
 </logs>
